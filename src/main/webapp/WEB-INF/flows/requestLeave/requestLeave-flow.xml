@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="requestLeaveForm">
+
+    <var name="target" class="com.ubiquitech.leaveTrack.form.RequestLeaveForm"/>
+
+    <on-start>
+        <evaluate expression="requestAction.setupSupervisorOptions(target)" />
+    </on-start>
+    <view-state id="requestLeaveForm" model="target">
+        <binder>
+            <binding property="startDate"/>
+            <binding property="endDate"/>
+            <binding property="request.leaveType"/>
+            <binding property="request.reason"/>
+        </binder>
+
+        <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
+        <transition on="next" to="confirmDetails">
+        <evaluate expression="requestAction.confirmDetails(target,messageContext)"/>
+        </transition>
+    </view-state>
+
+    <view-state id="confirmDetails">
+        <transition on="back" to="requestLeaveForm"/>
+        <transition on="confirm" to="sendToLoginEndState">
+            <evaluate expression="requestAction.apply(target,externalContext.sessionMap)"/>
+            <evaluate expression="requestAction.sendSupervisorEmail(target,externalContext.sessionMap)"/>
+        </transition>
+    </view-state>
+
+    <end-state id="sendToLoginEndState" view="requestSuccessful.jsp"/>
+
+    <end-state id="home" view="externalRedirect:home"/>
+
+
+</flow>

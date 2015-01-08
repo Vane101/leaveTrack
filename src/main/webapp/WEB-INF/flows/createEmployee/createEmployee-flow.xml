@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        start-state="createEmployeeForm">
+
+       <var name="target" class="com.ubiquitech.leaveTrack.form.CreateEmployeeForm"/>
+
+    <on-start>
+        <evaluate expression="loginAndCreateEmployeeDatabaseAction.setupSupervisorOptions(target)" />
+    </on-start>
+       <view-state id="createEmployeeForm" model="target">
+           <binder>
+               <binding property="employee.username"/>
+               <binding property="employee.firstName"/>
+               <binding property="employee.lastName"/>
+               <binding property="employee.phoneNumber"/>
+               <binding property="employee.email"/>
+               <binding property="employee.jobTitle"/>
+               <binding property="password"/>
+               <binding property="confirmPassword"/>
+               <binding property="employee.supervisorId"/>
+               <binding property="dateEmployed"/>
+            </binder>
+           <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
+           <transition on="next" to="confirmDetails">
+            <evaluate expression="loginAndCreateEmployeeDatabaseAction.setSupervisorName(target,messageContext)"/>
+            <evaluate expression="loginAndCreateEmployeeDatabaseAction.confirmDetails(flowRequestContext,messageContext)"/>
+            <evaluate expression="loginAndCreateEmployeeDatabaseAction.hashPassword(target)"/>
+           </transition>
+       </view-state>
+
+    <view-state id="confirmDetails" model="target">
+        <binder>
+            <binding property="employee.username"/>
+            <binding property="employee.firstName"/>
+            <binding property="employee.lastName"/>
+            <binding property="employee.phoneNumber"/>
+            <binding property="employee.email"/>
+            <binding property="employee.jobTitle"/>
+            <binding property="employee.supervisorId"/>
+            <binding property="dateEmployed"/>
+        </binder>
+         <transition on="back" to="createEmployeeForm"/>
+         <transition on="register" to="sendToLoginEndState">
+             <evaluate expression="loginAndCreateEmployeeDatabaseAction.createEmployee(flowRequestContext)"/>
+         </transition>
+     </view-state>
+
+    <end-state id="sendToLoginEndState" view="createSuccessful.jsp"/>
+    <end-state id="home" view="externalRedirect:home"/>
+
+</flow>

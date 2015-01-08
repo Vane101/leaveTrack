@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+	http://www.springframework.org/schema/webflow
+	http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="receiveRequests">
+
+    <var name="target" class="com.ubiquitech.leaveTrack.form.ProcessEmployeeLeaveForm"/>
+    <on-start>
+        <evaluate expression="supervisorActions.getloggedRequests(flowRequestContext,externalContext.sessionMap)"/>
+    </on-start>
+
+    <view-state id="receiveRequests">
+      <transition on="processRequest" to="selectRequest" validate="false" bind="false"/>
+        <transition on="cancel" to="home" validate="false" bind="false"/>
+    </view-state>
+
+    <action-state id="selectRequest">
+        <on-entry>
+            <set name="requestScope.requestId" value="requestParameters.requestId" />
+        </on-entry>
+        <evaluate expression="supervisorActions.selectLeaveRequest(requestId,target)" />
+        <transition to="processLeaveRequest" />
+    </action-state>
+
+    <view-state id="processLeaveRequest" model="target">
+        <binder>
+            <binding property="employeeFullName"/>
+            <binding property="request.startDate"/>
+            <binding property="request.endDate"/>
+            <binding property="request.leaveType"/>
+            <binding property="request.reason"/>
+            <binding property="request.status"/>
+            <binding property="request.timestamp"/>
+            <binding property="request.comment"/>
+        </binder>
+       <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="back" to="receiveRequests" validate="false" bind="false"/>
+        <transition on="save" to="confirm">
+        <evaluate expression="supervisorActions.updateRequest(target)" />
+        </transition>
+    </view-state>
+
+    <end-state id="confirm" view="requestProcessedconfirmation.jsp"/>
+    <end-state id="home" view="externalRedirect:home"/>
+
+    </flow>

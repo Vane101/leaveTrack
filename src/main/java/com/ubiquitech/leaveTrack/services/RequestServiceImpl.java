@@ -1,0 +1,34 @@
+package com.ubiquitech.leaveTrack.services;
+
+
+import com.ubiquitech.leaveTrack.dao.RequestDao;
+import com.ubiquitech.leaveTrack.domain.Request;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
+/**
+ * Created by vane on 2014/12/08.
+ */
+public class RequestServiceImpl implements RequestService {
+
+    @Autowired
+    RequestDao requestDao;
+
+       @Override
+    public void createRequest(Request request) {
+        requestDao.createRequest(request);
+    }
+
+    @Override
+    public List getRequestsByStatusAndSupervisorId(String status, Long id) {
+       return requestDao.getRequestsByStatusAndSupervisorId(status,id);
+    }
+
+    @Override
+    public List getRequestsByStatusAndRequestId(String status,Long id) {
+        return requestDao.getRequestsByStatusAndRequestId(status,id);
+    }
+}
+
+

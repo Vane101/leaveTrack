@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="editEmployeeForm">
+
+    <var name="target" class="com.ubiquitech.leaveTrack.form.EditEmployeeForm"/>
+
+    <on-start>
+        <evaluate expression="editEmployeeDatabaseAction.setupFormObject(target, externalContext.sessionMap)"/>
+    </on-start>
+
+    <view-state id="editEmployeeForm" model="target">
+        <binder>
+            <binding property="employee.firstName"/>
+            <binding property="employee.lastName"/>
+            <binding property="employee.phoneNumber"/>
+            <binding property="employee.email"/>
+            <binding property="employee.jobTitle"/>
+            <binding property="employee.supervisorId"/>
+       </binder>
+        <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
+        <transition on="next" to="confirmDetails">
+            <evaluate expression="editEmployeeDatabaseAction.setSupervisorName(target,messageContext)"/>
+            <evaluate expression="editEmployeeDatabaseAction.confirmDetails(flowRequestContext,messageContext)"/>
+         </transition>
+      </view-state>
+
+    <view-state id="confirmDetails" model="target">
+        <binder>
+            <binding property="employee.firstName"/>
+            <binding property="employee.lastName"/>
+            <binding property="employee.phoneNumber"/>
+            <binding property="employee.email"/>
+            <binding property="employee.jobTitle"/>
+            <binding property="employee.supervisorId"/>
+        </binder>
+        <transition on="back" to="editEmployeeForm"/>
+        <transition on="confirm" to="sendToLoginEndState">
+            <evaluate expression="editEmployeeDatabaseAction.createEmployee(flowRequestContext)"/>
+        </transition>
+    </view-state>
+
+    <end-state id="sendToLoginEndState" view="editSuccessful.jsp"/>
+    <end-state id="home" view="externalRedirect:home"/>
+
+
+</flow>
