@@ -8,6 +8,8 @@ import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
 import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -22,11 +24,11 @@ import java.util.List;
 /**
  * Created by vane on 2014/12/08.
  */
-public class RequestActions extends MultiAction {
+public class RequestLeaveActions extends MultiAction {
       private RequestServiceImpl requestService;
       private EmployeeServiceImpl employeeService;
       final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy/MM/dd");
-
+       final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
     @Autowired
     private Mail mail;
 
@@ -79,13 +81,20 @@ public class RequestActions extends MultiAction {
     public Event sendSupervisorEmail(RequestLeaveForm form,SharedAttributeMap map) {
         String supervisorEmail=employeeService.getSupervisorEmail((long)form.getRequest().getEmployee().getSupervisorId());
         Employee employee =(Employee)map.get("employeeSession");
-        mail.sendMail(
+
+       try {
+           mail.sendMail(
                 /*FROM:*/ "vane@ubiquitech.co.za",
                   /*TO:*/ supervisorEmail,
              /*SUBJECT:*/  "Leave Request",
-             /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getFirstName() +" " + employee.getLastName()
-                +" has applied for leave, please log into leaveTrack to process this request.");
-        return success();
+             /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getFirstName() + " " + employee.getLastName()
+                   + " has applied for leave, please log into leaveTrack to process this request.");
+            return success();
+       }catch (Exception e){
+           logger.error("Email could not be sent");
+           return error();
+       }
+
     }
 
     public void setEmployeeService(EmployeeServiceImpl employeeService) {

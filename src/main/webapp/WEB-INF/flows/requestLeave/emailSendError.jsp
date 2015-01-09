@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: vane
-  Date: 2014/12/19
-  Time: 04:42 PM
+  Date: 2015/01/09
+  Time: 02:28 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,14 +17,14 @@
 <div class="applicationBody">
 
     <div class="heading">
-        <p>&nbsp<span class="headingLeft">Process Leave Request</span>
+        <p>&nbsp<span class="headingLeft">Request Leave</span>
             <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span></p>
     </div>
 
     <div class="form">
         <div class="notification">
-            <p>The Application has been processed successfully</p>
-            <P>An email has been sent to the employee</p>
+            <p>Leave request has been logged successfully</p>
+            <P>However an email could not be sent to your supervisor due to technical difficulties</p>
             <form action="home">
                 <input type="submit" value="OK">
             </form>

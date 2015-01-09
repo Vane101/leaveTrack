@@ -38,7 +38,7 @@ public class HelloController {
           String message = "";
         if (authfailed != null) {
             message = "Invalid username or password";
-        } else if (logout != null) {
+             } else if (logout != null) {
         HttpSession session = request.getSession();
 
           session.invalidate();

@@ -26,7 +26,7 @@
         <div class="notification">
             <p>Leave request has been logged successfully</p>
             <P>The request has been sent to your supervisor for processing</p>
-            <form action="/home">
+            <form action="home">
                 <input type="submit" value="OK">
             </form>
         </div>

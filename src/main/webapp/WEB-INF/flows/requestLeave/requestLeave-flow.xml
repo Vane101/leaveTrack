@@ -7,7 +7,7 @@
     <var name="target" class="com.ubiquitech.leaveTrack.form.RequestLeaveForm"/>
 
     <on-start>
-        <evaluate expression="requestAction.setupSupervisorOptions(target)" />
+        <evaluate expression="requestLeaveAction.setupSupervisorOptions(target)" />
     </on-start>
     <view-state id="requestLeaveForm" model="target">
         <binder>
@@ -19,18 +19,24 @@
 
         <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
         <transition on="next" to="confirmDetails">
-        <evaluate expression="requestAction.confirmDetails(target,messageContext)"/>
+        <evaluate expression="requestLeaveAction.confirmDetails(target,messageContext)"/>
         </transition>
     </view-state>
 
     <view-state id="confirmDetails">
         <transition on="back" to="requestLeaveForm"/>
-        <transition on="confirm" to="sendToLoginEndState">
-            <evaluate expression="requestAction.apply(target,externalContext.sessionMap)"/>
-            <evaluate expression="requestAction.sendSupervisorEmail(target,externalContext.sessionMap)"/>
-        </transition>
+        <transition on="confirm" to="sendEmail">
+            <evaluate expression="requestLeaveAction.apply(target,externalContext.sessionMap)"/>
+         </transition>
     </view-state>
 
+    <action-state id="sendEmail">
+        <evaluate expression="requestLeaveAction.sendSupervisorEmail(target,externalContext.sessionMap)"/>
+        <transition on="success" to="sendToLoginEndState"/>
+        <transition on="error" to="emailErrorEndState"/>
+    </action-state>
+
+    <end-state id="emailErrorEndState" view="emailSendError.jsp"/>
     <end-state id="sendToLoginEndState" view="requestSuccessful.jsp"/>
 
     <end-state id="home" view="externalRedirect:home"/>
