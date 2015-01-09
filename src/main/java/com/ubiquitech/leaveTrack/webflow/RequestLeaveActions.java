@@ -92,6 +92,7 @@ public class RequestLeaveActions extends MultiAction {
             return success();
        }catch (Exception e){
            logger.error("Email could not be sent");
+           logger.debug("Debug message",e);
            return error();
        }
 

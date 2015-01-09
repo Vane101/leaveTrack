@@ -16,10 +16,21 @@
         xmlns:jsp="http://java.sun.com/JSP/Page"
         xmlns:spring="http://www.springframework.org/tags"
         xmlns:form="http://www.springframework.org/tags/form">
-
 <head>
     <title></title>
     <link href="<c:url value="/resources/theme/css/design.css"/>" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+     <script>
+        $(function() {
+            $( "#dateFrom" ).datepicker({dateFormat:'yy/mm/dd'});
+        });
+
+        $(function() {
+            $( "#dateTo" ).datepicker({dateFormat:'yy/mm/dd'});
+        });
+    </script>
 </head>
 
 <body>
@@ -46,13 +57,13 @@
                     </tr>
                     <tr>
                         <td class="label">Start Date</td>
-                        <td><form:input path="startDate" size="25" placeholder="CCYY/MM/DD"/></td>
+                        <td><form:input id="dateFrom" path="startDate" size="25" placeholder="CCYY/MM/DD"/></td>
                         <td  Class="error-message"> <form:errors path="startDate"/></td>
                     </tr>
 
                     <tr>
                         <td class="label">End Date</td>
-                        <td><form:input path="endDate" size="25" placeholder="CCYY/MM/DD"/></td>
+                        <td><form:input id="dateTo" path="endDate" size="25" placeholder="CCYY/MM/DD"/></td>
                         <td  Class="error-message"> <form:errors path="endDate"/></td>
                     </tr>
                     <tr>
