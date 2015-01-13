@@ -43,7 +43,7 @@ leaveType varchar (255) NOT NULL ,
 reason TEXT NOT NULL ,
 startDate Date NOT NULL ,
 endDate Date NOT NULL ,
-status varchar (255),
+state varchar (255),
 comment  TEXT);
 
 
