@@ -28,13 +28,13 @@ public class RequestLeaveActions extends MultiAction {
       private RequestServiceImpl requestService;
       private EmployeeServiceImpl employeeService;
       final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy/MM/dd");
-       final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
+      final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
     @Autowired
     private Mail mail;
 
     public Event setupSupervisorOptions(RequestLeaveForm form){
         form.getRequest().setComment("");
-        form.getRequest().setStatus("Logged");
+        form.getRequest().setState("Logged");
         List<String> leaveTypes = new ArrayList<String>();
         leaveTypes.add("Annual Leave");
         leaveTypes.add("Sick Leave");
@@ -67,24 +67,23 @@ public class RequestLeaveActions extends MultiAction {
             messageContext.addMessage(errorMessageBuilder.build());
             return new EventFactorySupport().error(this);
         }
-
     }
 
     public Event apply(RequestLeaveForm form, SharedAttributeMap map) {
        Employee employee =(Employee)map.get("employeeSession");
         Request request = form.getRequest();
+        request.setSupervisorId(employee.getSupervisor().getId());
         request.setEmployee(employee);
         requestService.createRequest(request);
         return success();
     }
 
     public Event sendSupervisorEmail(RequestLeaveForm form,SharedAttributeMap map) {
-        String supervisorEmail=employeeService.getSupervisorEmail((long)form.getRequest().getEmployee().getSupervisorId());
         Employee employee =(Employee)map.get("employeeSession");
-
+        String supervisorEmail= employee.getSupervisor().getEmail();
        try {
            mail.sendMail(
-                /*FROM:*/ "vane@ubiquitech.co.za",
+                /*FROM:*/ employee.getEmail(),
                   /*TO:*/ supervisorEmail,
              /*SUBJECT:*/  "Leave Request",
              /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getFirstName() + " " + employee.getLastName()
@@ -95,6 +94,7 @@ public class RequestLeaveActions extends MultiAction {
            logger.debug("Debug message",e);
            return error();
        }
+
 
     }
 

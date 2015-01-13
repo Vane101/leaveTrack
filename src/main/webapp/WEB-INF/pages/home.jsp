@@ -19,11 +19,11 @@
                     <div class="form">
                          <div class="Tasks">
                             <a href="${logoutUrl}">Logout</a><br><br>
-                            <a href='<c:url value="/createEmployee"/>'><span>Create employee</span></a> <br> <br>
-                            <a href='<c:url value="/changePassword"/>'><span>Change password</span></a> <br> <br>
-                            <a href='<c:url value="/editEmployee"/>'><span>Edit Details</span></a> <br> <br>
-                            <a href='<c:url value="/requestLeave"/>'><span>Request Leave</span></a> <br> <br>
-                            <a href='<c:url value="/processRequests"/>'><span>Process Requests</span></a> <br> <br>
+                            <a href="/createEmployee"><span>Create employee</span></a> <br> <br>
+                            <a href="/changePassword"><span>Change password</span></a> <br> <br>
+                            <a href="/editEmployee"><span>Edit Details</span></a> <br> <br>
+                            <a href="/requestLeave"><span>Request Leave</span></a> <br> <br>
+                            <a href="/processRequests"><span>Process Requests</span></a> <br> <br>
                           </div>
                         <%@ include file="/resources/theme/footer.jsp" %>
                      </div>

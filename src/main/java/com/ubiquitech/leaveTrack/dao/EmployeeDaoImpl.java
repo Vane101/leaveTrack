@@ -25,7 +25,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public void createEmployee(Employee employee) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(employee);
+    }
 
+    @Override
+    public Employee getEmployeeById(Long id) {
+        Session session = sessionFactory.openSession();
+        Employee employee=(Employee) session.get(Employee.class,id);
+         session.close();
+        return employee;
     }
 
     @Override
@@ -80,7 +87,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployee(String username) {
        String sql_Query= String.format("select id from Employee where(username='%s')", username);
-       BigInteger id=null;
+        BigInteger id=null;
         Employee employee = null;
         List<Object[]> employees=null ;
 
@@ -107,24 +114,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
          return employee;
     }
 
-    @Override
-    public String getSupervisorEmail(Long id) {
-       String email="";
-        String sql_Query= String.format("select email from Employee where(id='%s')", id);
-
-        try {
-            Session session = sessionFactory.openSession();
-            Query q= session.createSQLQuery(sql_Query);
-            List idList= q.list();
-           email= (String)idList.get(0);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-        return email;
-    }
 
     @Override
     public String getEmployeeName(Long id) {

@@ -36,12 +36,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public String getSupervisorEmail(Long id) {
-        return employeeDao.getSupervisorEmail(id);
+    public String getEmployeeName(Long id) {
+        return employeeDao.getEmployeeName(id);
     }
 
     @Override
-    public String getEmployeeName(Long id) {
-        return employeeDao.getEmployeeName(id);
+    public Employee getEmployeeById(Long id) {
+        return employeeDao.getEmployeeById(id);
     }
 }

@@ -71,9 +71,9 @@
                     <tr>
                         <td class="label">Supervisor</td>
                         <td Class="droplist">
-                            <form:select path="employee.supervisorId">
-                                <c:forEach items="${target.map.name}" var="supervisorId" varStatus="loopStatus">
-                                    <form:option value="${loopStatus.index}">${supervisorId}</form:option>
+                            <form:select path="supervisorID">
+                                <c:forEach items="${target.map.name}" var="supervisorID" varStatus="loopStatus">
+                                    <form:option value="${loopStatus.index}">${supervisorID}</form:option>
                                 </c:forEach>
                             </form:select>
                         </td>

@@ -34,23 +34,29 @@ public class EditEmployeeDatabaseAction  extends MultiAction{
         }
         form.setMap(nameList);
 
-        return success();
+        try {
+            Integer supervisorID = (int) (long) newEmployee.getSupervisor().getId();
+            form.setSupervisorID(supervisorID);
+        }catch (Exception e){
+            form.setSupervisorID(0);
+           }
+
+         return success();
     }
 
-    public Event setSupervisorName (EditEmployeeForm form, MessageContext messageContext ){
-        List map= (List) form.getMap().get("name");
-        if(form.getEmployee().getSupervisorId()>0) {
-            form.setSupervisorName((String)map.get(form.getEmployee().getSupervisorId()));
-        } else{
+    public Event setSupervisorName (EditEmployeeForm form, MessageContext messageContext ) {
+        List map = (List) form.getMap().get("name");
+         if (form.getSupervisorID() > 0) {
+            form.setSupervisorName((String) map.get(form.getSupervisorID()));
+            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long)form.getSupervisorID()));
+        } else {
             form.setSupervisorName("");
         }
 
-        if(form.getEmployee().getSupervisorId()==0){
-            form.getEmployee().setSupervisorId(null);
+        if (form.getSupervisorID()== 0) {
+            form.getEmployee().setSupervisor(null);
         }
-
         return success();
-
     }
 
     public Event confirmDetails(RequestContext content, MessageContext messageContext) {

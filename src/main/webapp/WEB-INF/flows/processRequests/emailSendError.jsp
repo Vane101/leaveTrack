@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: vane
-  Date: 2014/12/19
-  Time: 04:42 PM
+  Date: 2015/01/09
+  Time: 02:28 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -24,7 +24,7 @@
     <div class="form">
         <div class="notification">
             <p>The Application has been processed successfully</p>
-            <p>An email has been sent to the employee</p>
+            <p>However an email could not be sent to the employee</p>
             <form action="home">
                 <input type="submit" value="OK">
             </form>

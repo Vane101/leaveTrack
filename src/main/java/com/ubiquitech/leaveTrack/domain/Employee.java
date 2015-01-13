@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -34,8 +35,13 @@ public class Employee  implements Serializable{
     private String email;
     private String jobTitle;
 
-    @Column(name="supervisorid")
-    private Integer supervisorId;
+    @ManyToOne(cascade ={CascadeType.ALL})
+    @JoinColumn(name="supervisorid")
+     private Employee supervisor;
+
+     @OneToMany(mappedBy = "supervisor")
+      private Set<Employee> subordinates = new HashSet<Employee>();
+
     private String password;
 
     @OneToMany(mappedBy="employee",cascade = {CascadeType.ALL})
@@ -73,14 +79,6 @@ public class Employee  implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getSupervisorId() {
-        return supervisorId;
-    }
-
-    public void setSupervisorId(Integer supervisorId) {
-        this.supervisorId = supervisorId;
     }
 
     public String getJobTitle() {
@@ -149,5 +147,25 @@ public class Employee  implements Serializable{
 
     public void setRequest(Set<Request> request) {
         this.request = request;
+    }
+
+    public Set<Employee> getSubordinates() {
+        return subordinates;
+    }
+
+    public void setSubordinates(Set<Employee> subordinates) {
+        this.subordinates = subordinates;
+    }
+
+    public Employee getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Employee supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

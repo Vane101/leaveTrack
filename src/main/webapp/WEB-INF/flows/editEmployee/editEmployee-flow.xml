@@ -17,8 +17,8 @@
             <binding property="employee.phoneNumber"/>
             <binding property="employee.email"/>
             <binding property="employee.jobTitle"/>
-            <binding property="employee.supervisorId"/>
-       </binder>
+            <binding property="supervisorID"/>
+        </binder>
         <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
         <transition on="next" to="confirmDetails">
             <evaluate expression="editEmployeeDatabaseAction.setSupervisorName(target,messageContext)"/>
@@ -33,7 +33,7 @@
             <binding property="employee.phoneNumber"/>
             <binding property="employee.email"/>
             <binding property="employee.jobTitle"/>
-            <binding property="employee.supervisorId"/>
+            <binding property="supervisorID"/>
         </binder>
         <transition on="back" to="editEmployeeForm"/>
         <transition on="confirm" to="sendToLoginEndState">

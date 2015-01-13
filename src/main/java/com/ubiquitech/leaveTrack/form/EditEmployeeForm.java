@@ -17,6 +17,7 @@ public class EditEmployeeForm implements Serializable{
     protected Map<String,Object> map;
 
     protected String supervisorName;
+    protected Integer supervisorID;
 
     @Valid
     protected Employee employee=new Employee();
@@ -46,4 +47,11 @@ public class EditEmployeeForm implements Serializable{
         this.supervisorName = supervisorName;
     }
 
+    public Integer getSupervisorID() {
+        return supervisorID;
+    }
+
+    public void setSupervisorID(Integer supervisorID) {
+        this.supervisorID = supervisorID;
+    }
 }

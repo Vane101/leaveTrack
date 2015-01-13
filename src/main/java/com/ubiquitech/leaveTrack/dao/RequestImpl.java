@@ -29,20 +29,20 @@ public class RequestImpl implements RequestDao {
     }
 
     @Override
-    public List getRequestsByStatusAndSupervisorId(String status, Long id) {
+    public List getRequestsByStatusAndSupervisorId(String state, Long id) {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("FROM Request where supervisorId= :id and status=:status");
-        query.setLong("id", id);
-        query.setString("status",status);
+        Query query = session.createQuery("FROM Request where supervisorId=:id and state=:state");
+        query.setLong("id",id);
+        query.setString("state",state);
         return query.list();
     }
 
     @Override
-    public List getRequestsByStatusAndRequestId(String status, Long id) {
+    public List getRequestsByStatusAndRequestId(String state, Long id) {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("FROM Request where id= :id and status=:status");
+        Query query = session.createQuery("FROM Request where id= :id and state=:state");
         query.setLong("id", id);
-        query.setString("status",status);
+        query.setString("state",state);
        return  query.list();
     }
 

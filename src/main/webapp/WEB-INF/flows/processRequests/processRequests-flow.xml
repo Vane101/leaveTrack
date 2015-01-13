@@ -8,7 +8,7 @@
 
     <var name="target" class="com.ubiquitech.leaveTrack.form.ProcessEmployeeLeaveForm"/>
     <on-start>
-        <evaluate expression="supervisorActions.getloggedRequests(flowRequestContext,externalContext.sessionMap)"/>
+        <evaluate expression="supervisorActions.getLoggedRequests(flowRequestContext,externalContext.sessionMap)"/>
     </on-start>
 
     <view-state id="receiveRequests">
@@ -31,18 +31,26 @@
             <binding property="request.endDate"/>
             <binding property="request.leaveType"/>
             <binding property="request.reason"/>
-            <binding property="request.status"/>
+            <binding property="request.state"/>
             <binding property="request.timestamp"/>
             <binding property="request.comment"/>
         </binder>
        <transition on="cancel" to="home" validate="false" bind="false"/>
         <transition on="back" to="receiveRequests" validate="false" bind="false"/>
-        <transition on="save" to="confirm">
+        <transition on="save" to="sendEmail">
         <evaluate expression="supervisorActions.updateRequest(target)" />
         </transition>
     </view-state>
 
-    <end-state id="confirm" view="requestProcessedconfirmation.jsp"/>
+    <action-state id="sendEmail">
+        <evaluate expression="supervisorActions.sendEmplyeeEmail(target,externalContext.sessionMap)"/>
+        <transition on="success" to="emailSendSuccessful"/>
+        <transition on="error" to="emailErrorEndState"/>
+    </action-state>
+
+
+    <end-state id="emailErrorEndState" view="emailSendError.jsp"/>
+    <end-state id="emailSendSuccessful" view="requestProcessedconfirmation.jsp"/>
     <end-state id="home" view="externalRedirect:home"/>
 
     </flow>

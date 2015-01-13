@@ -21,13 +21,13 @@ public class Request implements Serializable {
     private long id;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name="employeeid", referencedColumnName ="id"),
-            @JoinColumn(name="supervisorid",referencedColumnName ="supervisorid")})
+    @JoinColumn(name="employeeid", referencedColumnName ="id")
     private Employee employee;
 
     @Column(name="employeeid",insertable = false,updatable = false)
     private long employeeId;
+
+    private long supervisorId;
 
     private String timestamp;
 
@@ -41,7 +41,7 @@ public class Request implements Serializable {
     private LocalDate endDate;
     private String comment;
     @NotEmpty
-    private String status;
+    private String state;
 
     public String getComment() {
         return comment;
@@ -100,14 +100,6 @@ public class Request implements Serializable {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Employee getEmployee() {
         return employee;
     }
@@ -122,5 +114,21 @@ public class Request implements Serializable {
 
     public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public long getSupervisorId() {
+        return supervisorId;
+    }
+
+    public void setSupervisorId(long supervisorId) {
+        this.supervisorId = supervisorId;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

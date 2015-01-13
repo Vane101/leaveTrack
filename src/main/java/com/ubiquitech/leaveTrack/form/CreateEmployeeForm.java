@@ -18,8 +18,8 @@ public class CreateEmployeeForm implements Serializable{
     protected Map<String,Object> map;
     @NotEmpty
     protected String confirmPassword;
-
     protected String supervisorName;
+    protected Integer supervisorID;
 
     @Valid
     protected Employee employee=new Employee();
@@ -76,5 +76,13 @@ public class CreateEmployeeForm implements Serializable{
 
     public void setDateEmployed(String dateEmployed) {
         this.dateEmployed = dateEmployed;
+    }
+
+    public Integer getSupervisorID() {
+        return supervisorID;
+    }
+
+    public void setSupervisorID(Integer supervisorID) {
+        this.supervisorID = supervisorID;
     }
 }

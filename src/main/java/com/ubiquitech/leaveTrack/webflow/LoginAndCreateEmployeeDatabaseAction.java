@@ -27,9 +27,9 @@ public class LoginAndCreateEmployeeDatabaseAction extends MultiAction {
     final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy/MM/dd");
 
 
-public Event setupSupervisorOptions(CreateEmployeeForm form){
+public Event setupSupervisorOptions(CreateEmployeeForm form){//Set Supervisor options to be displayed on dropdown list
         List<String> nameList = new ArrayList<String>();
-        List<Object[]> employees =employeeService.getEmployeeNames();
+        List<Object[]> employees =employeeService.getEmployeeNames();//Gets all employee names
             nameList.add("Select");
         for(Object[] employee:employees){
             String name = employee[1]+" "+ employee[2];
@@ -39,20 +39,20 @@ public Event setupSupervisorOptions(CreateEmployeeForm form){
         return success();
     }
 
-    public Event setSupervisorName (CreateEmployeeForm form, MessageContext messageContext ){
+    public Event setSupervisorName (CreateEmployeeForm form, MessageContext messageContext ){ //set supervisor ID based on name selected
           List map= (List) form.getMap().get("name");
-         if(form.getEmployee().getSupervisorId()>0) {
-               form.setSupervisorName((String) map.get(form.getEmployee().getSupervisorId()));
+            if(form.getSupervisorID()>0) {
+            form.setSupervisorName((String) map.get(form.getSupervisorID()));
+            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long)form.getSupervisorID()));
           } else{
              form.setSupervisorName("");
          }
 
-        if(form.getEmployee().getSupervisorId()==0){
-            form.getEmployee().setSupervisorId(null);
+        if(form.getSupervisorID()==0){
+            form.getEmployee().setSupervisor(null);
            }
 
-
-    boolean found= employeeService.checkUsername(form.getEmployee().getUsername());
+      boolean found= employeeService.checkUsername(form.getEmployee().getUsername());
 
             if (found) {
                 MessageBuilder errorMessageBuilder = new MessageBuilder().error();
@@ -63,7 +63,6 @@ public Event setupSupervisorOptions(CreateEmployeeForm form){
             } else {
                 return success();
             }
-
     }
 
     public Event hashPassword(CreateEmployeeForm form) throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -72,7 +71,6 @@ public Event setupSupervisorOptions(CreateEmployeeForm form){
          String hashedPass = hashPassword.hash(password);
          form.getEmployee().setPassword(hashedPass);
         return success();
-
     }
 
    public Event confirmDetails(RequestContext content, MessageContext messageContext) {

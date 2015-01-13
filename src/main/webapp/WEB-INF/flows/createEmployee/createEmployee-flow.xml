@@ -19,7 +19,7 @@
                <binding property="employee.jobTitle"/>
                <binding property="password"/>
                <binding property="confirmPassword"/>
-               <binding property="employee.supervisorId"/>
+               <binding property="supervisorID"/>
                <binding property="dateEmployed"/>
             </binder>
            <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
@@ -38,7 +38,7 @@
             <binding property="employee.phoneNumber"/>
             <binding property="employee.email"/>
             <binding property="employee.jobTitle"/>
-            <binding property="employee.supervisorId"/>
+            <binding property="supervisorID"/>
             <binding property="dateEmployed"/>
         </binder>
          <transition on="back" to="createEmployeeForm"/>

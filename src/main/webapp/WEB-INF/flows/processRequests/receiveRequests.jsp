@@ -66,7 +66,7 @@
                         <td>${requests.reason}</td>
                         <td>${requests.startDate}</td>
                         <td>${requests.endDate}</td>
-                        <td>${requests.status}</td>
+                        <td>${requests.state}</td>
                     </tr>
                 </c:forEach>
 

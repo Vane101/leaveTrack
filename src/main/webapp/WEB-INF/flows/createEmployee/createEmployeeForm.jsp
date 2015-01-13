@@ -21,6 +21,15 @@
 <head>
     <title></title>
     <link href="<c:url value="/resources/theme/css/design.css"/>" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( "#Date" ).datepicker({dateFormat:'yy/mm/dd'});
+        });
+
+    </script>
 </head>
 
 <body>
@@ -68,16 +77,16 @@
                     <tr>
                         <td class="label">Supervisor</td>
                         <td Class="droplist">
-                            <form:select path="employee.supervisorId">
-                                <c:forEach items="${target.map.name}" var="supervisorId" varStatus="loopStatus">
-                                    <form:option value="${loopStatus.index}">${supervisorId}</form:option>
+                            <form:select path="supervisorID">
+                                <c:forEach items="${target.map.name}" var="supervisorID" varStatus="loopStatus">
+                                    <form:option value="${loopStatus.index}">${supervisorID}</form:option>
                                 </c:forEach>
                             </form:select>
                         </td>
                     </tr>
                     <tr>
                         <td class="label">Date employed:</td>
-                        <td><form:input path="dateEmployed" size="25" placeholder="CCYY/MM/DD"/></td>
+                        <td><form:input id="Date" path="dateEmployed" size="25" placeholder="CCYY/MM/DD"/></td>
                         <td  Class="error-message"> <form:errors path="dateEmployed"/></td>
                     </tr>
                     <tr>
