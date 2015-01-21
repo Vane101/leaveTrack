@@ -5,7 +5,9 @@ import com.ubiquitech.leaveTrack.calendar.FullCalendar;
 import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.domain.LeaveDays;
 import com.ubiquitech.leaveTrack.domain.Request;
+import com.ubiquitech.leaveTrack.services.EmployeeService;
 import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
+import com.ubiquitech.leaveTrack.services.RequestService;
 import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -29,10 +31,10 @@ import java.util.Random;
 @Controller
 public class HelloController {
       @Autowired
-      private EmployeeServiceImpl employeeService;
+      private EmployeeService employeeService;
 
     @Autowired
-     private RequestServiceImpl requestService;
+     private RequestService requestService;
 
     private List<FullCalendar> fullCalendar = new ArrayList<FullCalendar>();
 
@@ -82,6 +84,10 @@ public class HelloController {
 
     @RequestMapping("calendar")
      public void calendar(@RequestParam(required = false)HttpServletRequest request,HttpServletResponse response) {
+
+        // you might find it easier to use Jackson JSON mapper, which is supported by spring. You can return the object
+        // that you want converted to JSON from the method, and spring will automatically convert it to JSON. You just
+        // need to add a @ResponseBody annotation to the method.
 
        //Convert FullCalendar from Java to JSON
         Gson gson = new Gson();

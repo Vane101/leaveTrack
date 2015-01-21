@@ -4,7 +4,9 @@ import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.domain.Request;
 import com.ubiquitech.leaveTrack.eMail.Mail;
 import com.ubiquitech.leaveTrack.form.RequestLeaveForm;
+import com.ubiquitech.leaveTrack.services.EmployeeService;
 import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
+import com.ubiquitech.leaveTrack.services.RequestService;
 import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -25,8 +27,8 @@ import java.util.List;
  * Created by vane on 2014/12/08.
  */
 public class RequestLeaveActions extends MultiAction {
-      private RequestServiceImpl requestService;
-      private EmployeeServiceImpl employeeService;
+      private RequestService requestService;
+      private EmployeeService employeeService;
       final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy/MM/dd");
       final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
     @Autowired
@@ -98,11 +100,11 @@ public class RequestLeaveActions extends MultiAction {
 
     }
 
-    public void setEmployeeService(EmployeeServiceImpl employeeService) {
+    public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    public void setRequestService(RequestServiceImpl requestService) {
+    public void setRequestService(RequestService requestService) {
         this.requestService = requestService;
     }
 }

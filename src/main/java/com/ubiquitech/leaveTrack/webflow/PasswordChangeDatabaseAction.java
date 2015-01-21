@@ -3,7 +3,7 @@ package com.ubiquitech.leaveTrack.webflow;
 import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.form.ChangePasswordForm;
 import com.ubiquitech.leaveTrack.hash.HashPassword;
-import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
+import com.ubiquitech.leaveTrack.services.EmployeeService;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -17,7 +17,7 @@ import org.springframework.webflow.execution.RequestContext;
  * Created by vane on 2014/12/02.
  */
 public class PasswordChangeDatabaseAction extends MultiAction {
-    private EmployeeServiceImpl employeeService;
+    private EmployeeService employeeService;
     //private Employee employee;
 
     public Event confirmDetails(RequestContext context, MessageContext messageContext, SharedAttributeMap map) {
@@ -55,7 +55,7 @@ public class PasswordChangeDatabaseAction extends MultiAction {
 
 
 
-    public void setEmployeeService(EmployeeServiceImpl employeeService) {
+    public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 }
