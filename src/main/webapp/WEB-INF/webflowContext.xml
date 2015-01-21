@@ -63,4 +63,9 @@
         <property name="employeeService" ref="employeeService"/>
     </bean>
 
+    <bean id="requestQueryActions" class="com.ubiquitech.leaveTrack.webflow.RequestQueryActions">
+        <property name="requestService" ref="requestService"/>
+        <property name="employeeService" ref="employeeService"/>
+    </bean>
+
 </beans>

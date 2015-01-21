@@ -12,7 +12,7 @@
     </on-start>
 
     <view-state id="receiveRequests">
-      <transition on="processRequest" to="selectRequest" validate="false" bind="false"/>
+        <transition on="processRequest" to="selectRequest" validate="false" bind="false"/>
         <transition on="cancel" to="home" validate="false" bind="false"/>
     </view-state>
 
@@ -35,10 +35,10 @@
             <binding property="request.timestamp"/>
             <binding property="request.comment"/>
         </binder>
-       <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="cancel" to="home" validate="false" bind="false"/>
         <transition on="back" to="receiveRequests" validate="false" bind="false"/>
         <transition on="save" to="sendEmail">
-        <evaluate expression="supervisorActions.updateRequest(target)" />
+            <evaluate expression="supervisorActions.updateRequest(target)" />
         </transition>
     </view-state>
 
@@ -53,4 +53,4 @@
     <end-state id="emailSendSuccessful" view="requestProcessedconfirmation.jsp"/>
     <end-state id="home" view="externalRedirect:home"/>
 
-    </flow>
+</flow>

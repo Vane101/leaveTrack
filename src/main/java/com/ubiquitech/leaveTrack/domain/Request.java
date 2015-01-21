@@ -27,8 +27,6 @@ public class Request implements Serializable {
     @Column(name="employeeid",insertable = false,updatable = false)
     private long employeeId;
 
-    private long supervisorId;
-
     private String timestamp;
 
     @NotEmpty
@@ -114,14 +112,6 @@ public class Request implements Serializable {
 
     public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public long getSupervisorId() {
-        return supervisorId;
-    }
-
-    public void setSupervisorId(long supervisorId) {
-        this.supervisorId = supervisorId;
     }
 
     public String getState() {

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        start-state="requestQueryForm">
+
+    <var name="target" class="com.ubiquitech.leaveTrack.form.RequestQueryForm"/>
+
+    <view-state id="requestQueryForm" model="target">
+        <binder>
+            <binding property="employeeFirstName"/>
+            <binding property="employeeLastName"/>
+            <binding property="supervisorFirstName"/>
+            <binding property="supervisorLastName"/>
+            <binding property="leaveType"/>
+            <binding property="state"/>
+            <binding property="requestId"/>
+        </binder>
+        <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
+        <transition on="search" to="requestQueryResults">
+        <evaluate expression="requestQueryActions.getRequests(flowRequestContext)"/>
+        </transition>
+    </view-state>
+
+    <view-state id="requestQueryResults">
+        <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="back" to="requestQueryForm" validate="false" bind="false"/>
+        <transition on="processRequest" to="selectRequest" validate="false" bind="false"/>
+     </view-state>
+
+    <action-state id="selectRequest">
+        <on-entry>
+            <set name="requestScope.requestId" value="requestParameters.requestId" />
+        </on-entry>
+        <evaluate expression="requestQueryActions.selectLeaveRequest(requestId,target)" />
+        <transition to="requestDetails" />
+    </action-state>
+
+
+    <view-state id="requestDetails" model="target">
+        <binder>
+            <binding property="employeeFullName"/>
+            <binding property="request.startDate"/>
+            <binding property="request.endDate"/>
+            <binding property="request.leaveType"/>
+            <binding property="request.reason"/>
+            <binding property="request.state"/>
+            <binding property="request.timestamp"/>
+            <binding property="request.comment"/>
+            <binding property="supervisorFullName"/>
+        </binder>
+        <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="back" to="requestQueryResults" validate="false" bind="false"/>
+     </view-state>
+
+
+
+    <end-state id="home" view="externalRedirect:home"/>
+</flow>

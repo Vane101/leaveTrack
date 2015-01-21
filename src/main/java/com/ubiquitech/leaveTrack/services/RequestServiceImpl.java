@@ -3,6 +3,7 @@ package com.ubiquitech.leaveTrack.services;
 
 import com.ubiquitech.leaveTrack.dao.RequestDao;
 import com.ubiquitech.leaveTrack.domain.Request;
+import com.ubiquitech.leaveTrack.form.RequestQueryForm;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -28,6 +29,16 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public List getRequestsByStatusAndRequestId(String status,Long id) {
         return requestDao.getRequestsByStatusAndRequestId(status,id);
+    }
+
+    @Override
+    public List getRequestsByState(String state) {
+        return requestDao.getRequestsByState(state);
+    }
+
+    @Override
+    public List getQueriedRequests(RequestQueryForm requestQueryForm) {
+        return requestDao.getQueriedRequests(requestQueryForm);
     }
 }
 

@@ -12,6 +12,5 @@ public interface EmployeeDao {
     public List<Object[]> getEmployeeNames();
     public Boolean checkUsername(String username);
     public Employee getEmployee(String username);
-    public String getEmployeeName(Long id);
     public Employee getEmployeeById(Long id);
 }

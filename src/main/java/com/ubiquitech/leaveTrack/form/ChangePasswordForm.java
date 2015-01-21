@@ -17,7 +17,6 @@ public class ChangePasswordForm implements Serializable {
     @NotEmpty
     protected String confirmNewPassword;
 
-
     protected Employee employee=new Employee();
 
     public Employee getEmployee() {

@@ -1,8 +1,12 @@
 package com.ubiquitech.leaveTrack.mvc;
 
+import com.google.gson.Gson;
+import com.ubiquitech.leaveTrack.calendar.FullCalendar;
 import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.domain.LeaveDays;
+import com.ubiquitech.leaveTrack.domain.Request;
 import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
+import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -14,20 +18,89 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 
 @Controller
 public class HelloController {
       @Autowired
       private EmployeeServiceImpl employeeService;
 
+    @Autowired
+     private RequestServiceImpl requestService;
+
+    private List<FullCalendar> fullCalendar = new ArrayList<FullCalendar>();
+
+    private boolean calendarBoolean=true;
+
  @RequestMapping("/")
 	public ModelAndView index() {
 		return new ModelAndView("index");
 	}
 
+    @RequestMapping("/setupCalendar")
+    public ModelAndView  setupCalendar() {
+         fullCalendar.clear();
+        List<Request> requestsApproved;
+        requestsApproved = requestService.getRequestsByState("Approved");
+
+        Random rand = new Random();
+        String randomColor = "";
+        int myRandomNumber = 0;
+        String title = "";
+        String startDate = "";
+        String endDate = "";
+
+        if (calendarBoolean) {
+
+            for (int i = 0; i < requestsApproved.size(); i++) {
+                myRandomNumber = rand.nextInt(0x100000) + 0x100000;
+                randomColor = Integer.toHexString(myRandomNumber);
+                title = requestsApproved.get(i).getEmployee().getFirstName() + " " + requestsApproved.get(i).getEmployee().getLastName() + " " + requestsApproved.get(i).getLeaveType() + ".Request ID:" + requestsApproved.get(i).getId();
+                startDate = String.valueOf(requestsApproved.get(i).getStartDate());
+                endDate = String.valueOf(requestsApproved.get(i).getEndDate());
+                FullCalendar fc = new FullCalendar("#" + randomColor, title, startDate, endDate);
+                fullCalendar.add(fc);
+            }
+            calendarBoolean=false;
+        }
+
+        return new ModelAndView("/calendarView");
+
+    }
+
+    @RequestMapping("/calendarView")
+    public ModelAndView calendar() {
+        return new ModelAndView("calendarView");
+    }
+
+
+    @RequestMapping("calendar")
+     public void calendar(@RequestParam(required = false)HttpServletRequest request,HttpServletResponse response) {
+
+       //Convert FullCalendar from Java to JSON
+        Gson gson = new Gson();
+        String jsonAppointment = gson.toJson(fullCalendar);
+
+        //Printout the JSON
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            response.getWriter().write(jsonAppointment);
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @RequestMapping ("home")
     public ModelAndView menu(@ModelAttribute Employee employee){
+        calendarBoolean=true;
         return new ModelAndView("home");
     }
 

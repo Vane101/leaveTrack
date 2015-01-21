@@ -72,7 +72,7 @@ public class RequestLeaveActions extends MultiAction {
     public Event apply(RequestLeaveForm form, SharedAttributeMap map) {
        Employee employee =(Employee)map.get("employeeSession");
         Request request = form.getRequest();
-        request.setSupervisorId(employee.getSupervisor().getId());
+     //   request.setSupervisorId(employee.getSupervisor().getId());
         request.setEmployee(employee);
         requestService.createRequest(request);
         return success();

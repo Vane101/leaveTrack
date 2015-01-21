@@ -12,6 +12,7 @@ import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,6 +33,15 @@ public class EditEmployeeDatabaseAction  extends MultiAction{
             String name = employee[1]+" "+ employee[2];
             nameList.add(name);
         }
+        //Prevent from selecting yourself as a supervisor
+        for (Iterator<String> iterator=nameList.iterator();iterator.hasNext();){
+            String name=newEmployee.getFirstName()+" "+newEmployee.getLastName();
+            String string=iterator.next();
+            if(string.equals(name)){
+                iterator.remove();
+            }
+        }
+
         form.setMap(nameList);
 
         try {

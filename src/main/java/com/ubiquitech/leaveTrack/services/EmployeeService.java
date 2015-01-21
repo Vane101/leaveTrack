@@ -12,7 +12,6 @@ public interface EmployeeService {
     public  List<Object[]> getEmployeeNames();
     public Boolean checkUsername(String userName);
     public Employee getEmployee(String username);
-    public String getEmployeeName(Long id);
     public Employee getEmployeeById(Long id);
 
 }
