@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Created by vane on 2014/11/20.
  */
+
 public interface EmployeeService {
     public void createEmployee(Employee employee);
     public  List<Object[]> getEmployeeNames();

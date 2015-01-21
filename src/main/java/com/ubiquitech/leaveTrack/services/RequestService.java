@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by vane on 2014/12/08.
  */
+
 public interface RequestService {
     public void createRequest(Request request);
     public List getRequestsByStatusAndSupervisorId(String status, Long id);

@@ -13,6 +13,7 @@ import java.util.List;
  */
 
 @Service("employeeService")
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
    @Autowired
     EmployeeDao employeeDao;
