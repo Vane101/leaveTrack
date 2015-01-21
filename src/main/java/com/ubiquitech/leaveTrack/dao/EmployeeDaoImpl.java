@@ -1,12 +1,8 @@
 package com.ubiquitech.leaveTrack.dao;
 
 import com.ubiquitech.leaveTrack.domain.Employee;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +13,7 @@ import java.util.List;
  * Created by vane on 2014/11/20.
  */
 @Repository
-@Transactional
+@SuppressWarnings("unchecked")
 public class EmployeeDaoImpl implements EmployeeDao {
   @Autowired
    private SessionFactory sessionFactory;
@@ -30,46 +26,32 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeById(Long id) {
-        Session session = sessionFactory.openSession();
-        Employee employee=(Employee) session.get(Employee.class,id);
-        session.close();
-        return employee;
+        Session session = sessionFactory.getCurrentSession();
+        return (Employee) session.get(Employee.class,id);
     }
 
     @Override
     public List<Object[]> getEmployeeNames() {
-      List<Object[]> employees=null ;
-        Session session = sessionFactory.openSession();
-        Criteria criteria=session.createCriteria(Employee.class);
-        ProjectionList projectionList= Projections.projectionList();
-        projectionList.add(Projections.property("id"));
-        projectionList.add(Projections.property("firstName"));
-        projectionList.add(Projections.property("lastName"));
-        criteria.setProjection(projectionList);
-        employees=criteria.list();
-        session.close();
-        return employees;
+        String hql = "select e.id, e.firstName, e.lastName from Employee e";
+        return (List<Object[]>) sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
     @Override
     public Boolean checkUsername(String userName) {
-        Boolean found=true;
-        Session session = sessionFactory.openSession();
-        Criteria criteria = session.createCriteria(Employee.class);
-        criteria.add(Restrictions.eq("username", userName));
-        found = !criteria.list().isEmpty();
-        session.close();
-        return found;
+        List<Employee> results = sessionFactory.getCurrentSession()
+                .createQuery("from Employee where username = :val")
+                .setParameter("val", userName)
+                .list();
+        return !results.isEmpty();
     }
 
     @Override
     public Employee getEmployee(String username) {
-        Session session = sessionFactory.openSession();
-        Criteria criteria = session.createCriteria(Employee.class);
-        criteria.add(Restrictions.eq("username", username));
-        Employee employee =(Employee)criteria.list().get(0);
-        session.close();
-        return employee;
+        List<Employee> results = sessionFactory.getCurrentSession()
+                .createQuery("from Employee where username = :val")
+                .setParameter("val", username)
+                .list();
+        return results.isEmpty() ? null : results.get(0);
     }
 
 }

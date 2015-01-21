@@ -4,8 +4,8 @@ import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.domain.Request;
 import com.ubiquitech.leaveTrack.eMail.Mail;
 import com.ubiquitech.leaveTrack.form.ProcessEmployeeLeaveForm;
-import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
-import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
+import com.ubiquitech.leaveTrack.services.EmployeeService;
+import com.ubiquitech.leaveTrack.services.RequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ import java.util.List;
  * Created by vane on 2014/12/11.
  */
 public class SupervisorActions extends MultiAction {
-    private RequestServiceImpl requestService;
-    private EmployeeServiceImpl employeeService;
+    private RequestService requestService;
+    private EmployeeService employeeService;
     private  List<Request> requestsInLoggedStatus;
     private   List<Request>  requestSelected;
     @Autowired
@@ -76,11 +76,11 @@ public class SupervisorActions extends MultiAction {
     }
 
 
-    public void setEmployeeService(EmployeeServiceImpl employeeService) {
+    public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    public void setRequestService(RequestServiceImpl requestService) {
+    public void setRequestService(RequestService requestService) {
         this.requestService = requestService;
     }
 }

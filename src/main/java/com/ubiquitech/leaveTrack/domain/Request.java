@@ -39,7 +39,7 @@ public class Request implements Serializable {
     private LocalDate endDate;
     private String comment;
     @NotEmpty
-    private String state;
+    private String state; /* should this not be an enum i.e it can only have certain values? */
 
     public String getComment() {
         return comment;

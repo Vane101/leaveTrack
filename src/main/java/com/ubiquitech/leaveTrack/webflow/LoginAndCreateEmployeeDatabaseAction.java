@@ -3,7 +3,7 @@ package com.ubiquitech.leaveTrack.webflow;
 import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.form.CreateEmployeeForm;
 import com.ubiquitech.leaveTrack.hash.HashPassword;
-import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
+import com.ubiquitech.leaveTrack.services.EmployeeService;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.binding.message.MessageBuilder;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class LoginAndCreateEmployeeDatabaseAction extends MultiAction {
 
-    private EmployeeServiceImpl employeeService;
+    private EmployeeService employeeService;
     final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy/MM/dd");
 
 
@@ -140,7 +140,7 @@ public Event setupSupervisorOptions(CreateEmployeeForm form){//Set Supervisor op
         return event;
     }
 
-    public void setEmployeeService(EmployeeServiceImpl employeeService) {
+    public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 }

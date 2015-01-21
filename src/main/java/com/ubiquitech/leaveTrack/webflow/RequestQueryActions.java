@@ -2,8 +2,8 @@ package com.ubiquitech.leaveTrack.webflow;
 
 import com.ubiquitech.leaveTrack.domain.Request;
 import com.ubiquitech.leaveTrack.form.RequestQueryForm;
-import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
-import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
+import com.ubiquitech.leaveTrack.services.EmployeeService;
+import com.ubiquitech.leaveTrack.services.RequestService;
 import org.springframework.webflow.action.MultiAction;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
@@ -14,8 +14,8 @@ import java.util.List;
  * Created by vane on 2015/01/20.
  */
 public class RequestQueryActions extends MultiAction {
-    private RequestServiceImpl requestService;
-    private EmployeeServiceImpl employeeService;
+    private RequestService requestService;
+    private EmployeeService employeeService;
     private List<Request> requestsFound;
     private   List<Request>  requestSelected;
 
@@ -36,11 +36,11 @@ public class RequestQueryActions extends MultiAction {
         return success();
     }
 
-    public void setEmployeeService(EmployeeServiceImpl employeeService) {
+    public void setEmployeeService(EmployeeService employeeService) {
             this.employeeService = employeeService;
         }
 
-        public void setRequestService(RequestServiceImpl requestService) {
+        public void setRequestService(RequestService requestService) {
             this.requestService = requestService;
         }
 

@@ -2,6 +2,7 @@ package com.ubiquitech.leaveTrack.webflow;
 
 import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.form.EditEmployeeForm;
+import com.ubiquitech.leaveTrack.services.EmployeeService;
 import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by vane on 2014/12/04.
  */
 public class EditEmployeeDatabaseAction  extends MultiAction{
-    private EmployeeServiceImpl employeeService;
+    private EmployeeService employeeService;
 
     public Event setupFormObject(EditEmployeeForm form, SharedAttributeMap map) {
 
@@ -119,7 +120,7 @@ public class EditEmployeeDatabaseAction  extends MultiAction{
     }
 
 
-    public void setEmployeeService(EmployeeServiceImpl employeeService) {
+    public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 }
