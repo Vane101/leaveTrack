@@ -9,19 +9,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by vane on 2015/01/20.
+ * vane created on 2015/01/20.
  */
 public class RequestQueryForm implements Serializable {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
+    protected Map<String, Object> map = new HashMap<String, Object>();
+    protected Request request = new Request();
     String state;
     String leaveType;
     String employeeFirstName;
     String employeeLastName;
     String supervisorFirstName;
     String supervisorLastName;
-    Long  requestId;
-    protected Map<String, Object> map = new HashMap<String, Object>();
-    protected Request request = new Request();
+    Long requestId;
     String employeeFullName;
     String supervisorFullName;
 

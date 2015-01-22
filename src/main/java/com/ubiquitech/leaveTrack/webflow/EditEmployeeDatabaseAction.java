@@ -3,7 +3,6 @@ package com.ubiquitech.leaveTrack.webflow;
 import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.form.EditEmployeeForm;
 import com.ubiquitech.leaveTrack.services.EmployeeService;
-import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.webflow.action.EventFactorySupport;
@@ -17,28 +16,28 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by vane on 2014/12/04.
+ * vane created on 2014/12/04.
  */
-public class EditEmployeeDatabaseAction  extends MultiAction{
+public class EditEmployeeDatabaseAction extends MultiAction {
     private EmployeeService employeeService;
 
     public Event setupFormObject(EditEmployeeForm form, SharedAttributeMap map) {
 
-        Employee newEmployee =(Employee)map.get("employeeSession");
+        Employee newEmployee = (Employee) map.get("employeeSession");
         form.setEmployee(newEmployee);
 
         List<String> nameList = new ArrayList<String>();
-        List<Object[]> employees =employeeService.getEmployeeNames();
+        List<Object[]> employees = employeeService.getEmployeeNames();
         nameList.add("Select");
-        for(Object[] employee:employees){
-            String name = employee[1]+" "+ employee[2];
+        for (Object[] employee : employees) {
+            String name = employee[1] + " " + employee[2];
             nameList.add(name);
         }
         //Prevent from selecting yourself as a supervisor
-        for (Iterator<String> iterator=nameList.iterator();iterator.hasNext();){
-            String name=newEmployee.getFirstName()+" "+newEmployee.getLastName();
-            String string=iterator.next();
-            if(string.equals(name)){
+        for (Iterator<String> iterator = nameList.iterator(); iterator.hasNext(); ) {
+            String name = newEmployee.getFirstName() + " " + newEmployee.getLastName();
+            String string = iterator.next();
+            if (string.equals(name)) {
                 iterator.remove();
             }
         }
@@ -48,23 +47,23 @@ public class EditEmployeeDatabaseAction  extends MultiAction{
         try {
             Integer supervisorID = (int) (long) newEmployee.getSupervisor().getId();
             form.setSupervisorID(supervisorID);
-        }catch (Exception e){
+        } catch (Exception e) {
             form.setSupervisorID(0);
-           }
+        }
 
-         return success();
+        return success();
     }
 
-    public Event setSupervisorName (EditEmployeeForm form, MessageContext messageContext ) {
+    public Event setSupervisorName(EditEmployeeForm form, MessageContext messageContext) {
         List map = (List) form.getMap().get("name");
-         if (form.getSupervisorID() > 0) {
+        if (form.getSupervisorID() > 0) {
             form.setSupervisorName((String) map.get(form.getSupervisorID()));
-            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long)form.getSupervisorID()));
+            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long) form.getSupervisorID()));
         } else {
             form.setSupervisorName("");
         }
 
-        if (form.getSupervisorID()== 0) {
+        if (form.getSupervisorID() == 0) {
             form.getEmployee().setSupervisor(null);
         }
         return success();
@@ -75,28 +74,27 @@ public class EditEmployeeDatabaseAction  extends MultiAction{
         Event event = null;
         EditEmployeeForm form = (EditEmployeeForm) content.getFlowScope().get("target");
 
-        String phoneNumber=form.getEmployee().getPhoneNumber();
-        String email=form.getEmployee().getEmail();
+        String phoneNumber = form.getEmployee().getPhoneNumber();
+        String email = form.getEmployee().getEmail();
 
 
-
-        String emailPattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+        String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 
-        if(email.matches(emailPattern)){
-        }else {
-            MessageBuilder errorMessageBuilder= new MessageBuilder().error();
+        if (email.matches(emailPattern)) {
+        } else {
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("employee.email");
             errorMessageBuilder.code("wrongEmailFormat");
             messageContext.addMessage(errorMessageBuilder.build());
             return new EventFactorySupport().error(this);
         }
 
-        if (phoneNumber.matches("[2][7]\\d{9}")){
+        if (phoneNumber.matches("[2][7]\\d{9}")) {
             return success();
-        }else{
-            MessageBuilder errorMessageBuilder= new MessageBuilder().error();
+        } else {
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("employee.phoneNumber");
             errorMessageBuilder.code("wrongPhoneNumberFormat");
             messageContext.addMessage(errorMessageBuilder.build());

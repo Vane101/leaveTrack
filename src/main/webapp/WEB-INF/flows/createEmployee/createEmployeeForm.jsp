@@ -5,11 +5,11 @@
   Time: 02:15 PM
   To change this template use File | Settings | File Templates.
 --%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%--@elvariable id="employeeSession" type="com.ubiquitech.leaveTrack.domain.Employee"--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html
@@ -25,8 +25,8 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script>
-        $(function() {
-            $( "#Date" ).datepicker({dateFormat:'yy/mm/dd'});
+        $(function () {
+            $("#Date").datepicker({dateFormat: 'yy/mm/dd'});
         });
 
     </script>
@@ -37,7 +37,8 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Create New Employee </span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span></p>
+            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+        </p>
     </div>
 
     <div class="form">
@@ -47,18 +48,18 @@
                 <table class="tableFields">
                     <tr>
                         <td class="label">Username:</td>
-                        <td> <form:input path="employee.username" size="25" /></td>
+                        <td><form:input path="employee.username" size="25"/></td>
                         <td Class="error-message"><form:errors path="employee.username"/></td>
                     </tr>
                     <tr>
                         <td class="label">First name:</td>
-                        <td> <form:input path="employee.firstName" size="25" /></td>
-                        <td Class="error-message"><form:errors path="employee.firstName" /></td>
+                        <td><form:input path="employee.firstName" size="25"/></td>
+                        <td Class="error-message"><form:errors path="employee.firstName"/></td>
                     </tr>
                     <tr>
                         <td class="label">Last name:</td>
-                        <td><form:input path="employee.lastName" size="25" /></td>
-                        <td class="error-message"> <form:errors path="employee.lastName" /></td>
+                        <td><form:input path="employee.lastName" size="25"/></td>
+                        <td class="error-message"><form:errors path="employee.lastName"/></td>
                     </tr>
                     <tr>
                         <td class="label">Phone number</td>
@@ -68,11 +69,11 @@
                     <tr>
                         <td class="label">email:</td>
                         <td><form:input path="employee.email" size="25"/></td>
-                        <td  Class="error-message"> <form:errors path="employee.email"/></td>
+                        <td Class="error-message"><form:errors path="employee.email"/></td>
                     </tr>
                     <tr>
                         <td class="label">Job title:</td>
-                        <td><form:input path="employee.jobTitle" size="25"  /></td>
+                        <td><form:input path="employee.jobTitle" size="25"/></td>
                     </tr>
                     <tr>
                         <td class="label">Supervisor</td>
@@ -87,23 +88,23 @@
                     <tr>
                         <td class="label">Date employed:</td>
                         <td><form:input id="Date" path="dateEmployed" size="25" placeholder="CCYY/MM/DD"/></td>
-                        <td  Class="error-message"> <form:errors path="dateEmployed"/></td>
+                        <td Class="error-message"><form:errors path="dateEmployed"/></td>
                     </tr>
                     <tr>
                         <td class="label">Password</td>
                         <td><form:input path="password" type="password" size="25"/></td>
-                        <td  Class="error-message"><form:errors path="password" /></td>
+                        <td Class="error-message"><form:errors path="password"/></td>
                     </tr>
                     <tr>
                         <td class="label">Confirm password</td>
                         <td><form:input path="confirmPassword" type="password" size="25"/></td>
-                        <td Class="error-message"><form:errors path="confirmPassword" /></td>
+                        <td Class="error-message"><form:errors path="confirmPassword"/></td>
                     </tr>
                 </table>
             </fieldset>
             <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;  <form:button type="submit" name="_eventId_cancel">Cancel</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp;  <form:button type="submit" name="_eventId_next">Next</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel">Cancel</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_next">Next</form:button>
         </form:form>
         <%@ include file="/resources/theme/footer.jsp" %>
     </div>

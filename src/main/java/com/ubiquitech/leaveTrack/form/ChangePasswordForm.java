@@ -6,10 +6,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
- * Created by vane on 2014/12/02.
+ * vane created on 2014/12/02.
  */
 public class ChangePasswordForm implements Serializable {
-    public static final long serialVersionUID=1L;
+    public static final long serialVersionUID = 1L;
     @NotEmpty
     protected String oldPassword;
     @NotEmpty
@@ -17,7 +17,7 @@ public class ChangePasswordForm implements Serializable {
     @NotEmpty
     protected String confirmNewPassword;
 
-    protected Employee employee=new Employee();
+    protected Employee employee = new Employee();
 
     public Employee getEmployee() {
         return employee;

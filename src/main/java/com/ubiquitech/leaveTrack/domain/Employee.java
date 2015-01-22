@@ -8,16 +8,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by vane on 2014/11/17.
+ * vane created on 2014/11/17.
  */
 @Entity
-@Table(name="employee")
-public class Employee  implements Serializable{
-    private static final long serialVersionUID=1L;
+@Table(name = "employee")
+public class Employee implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Version
@@ -35,23 +35,23 @@ public class Employee  implements Serializable{
     private String email;
     private String jobTitle;
 
-    @ManyToOne(cascade ={CascadeType.ALL})
-    @JoinColumn(name="supervisorid")
-     private Employee supervisor;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "supervisorid")
+    private Employee supervisor;
 
-     @OneToMany(mappedBy = "supervisor")
-      private Set<Employee> subordinates = new HashSet<Employee>();
+    @OneToMany(mappedBy = "supervisor")
+    private Set<Employee> subordinates = new HashSet<Employee>();
 
     private String password;
 
-    @OneToMany(mappedBy="employee",cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL})
     private Set<Request> request;
 
-    @OneToOne(cascade ={CascadeType.ALL})//Parent Table
-    @JoinColumn(name="leaveId")//Column in parent table that joins with the child table column
+    @OneToOne(cascade = {CascadeType.ALL})//Parent Table
+    @JoinColumn(name = "leaveId")//Column in parent table that joins with the child table column
     private LeaveDays leaveDays; //Child table class (DOMAIN)
 
-    private boolean active =true;
+    private boolean active = true;
 
     public Employee() {
         this.leaveDays = new LeaveDays();
@@ -141,6 +141,10 @@ public class Employee  implements Serializable{
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Set<Request> getRequest() {
         return request;
     }
@@ -163,9 +167,5 @@ public class Employee  implements Serializable{
 
     public void setSupervisor(Employee supervisor) {
         this.supervisor = supervisor;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

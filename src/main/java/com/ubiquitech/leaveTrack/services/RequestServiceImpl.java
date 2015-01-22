@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by vane on 2014/12/08.
+ * vane created on 2014/12/08.
  */
 @Service("requestService")
 @Transactional
@@ -28,12 +28,12 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public List getRequestsByStatusAndSupervisorId(String status, Long id) {
-       return requestDao.getRequestsByStatusAndSupervisorId(status,id);
+        return requestDao.getRequestsByStatusAndSupervisorId(status, id);
     }
 
     @Override
-    public List getRequestsByStatusAndRequestId(String status,Long id) {
-        return requestDao.getRequestsByStatusAndRequestId(status,id);
+    public List getRequestsByStatusAndRequestId(String status, Long id) {
+        return requestDao.getRequestsByStatusAndRequestId(status, id);
     }
 
     @Override

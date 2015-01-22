@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by vane on 2014/12/08.
+ * vane created on 2014/12/08.
  */
 public class RequestLeaveForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
-     @Valid
+    @Valid
     protected Request request = new Request();
 
     @NotEmpty
@@ -51,7 +51,7 @@ public class RequestLeaveForm implements Serializable {
 
     public void setMap(List leaveType) {
         map = new HashMap<String, Object>();
-        map.put("leaveType",leaveType);
+        map.put("leaveType", leaveType);
     }
 
     public Request getRequest() {

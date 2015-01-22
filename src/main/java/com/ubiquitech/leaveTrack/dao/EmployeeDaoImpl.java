@@ -5,20 +5,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by vane on 2014/11/20.
+ * vane created on 2014/11/20.
  */
 @Repository
 @SuppressWarnings("unchecked")
 public class EmployeeDaoImpl implements EmployeeDao {
-  @Autowired
-   private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-     @Override
+    @Override
     public void createEmployee(Employee employee) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(employee);
@@ -27,7 +26,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployeeById(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        return (Employee) session.get(Employee.class,id);
+        return (Employee) session.get(Employee.class, id);
     }
 
     @Override

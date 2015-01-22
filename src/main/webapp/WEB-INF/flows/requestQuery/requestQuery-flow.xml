@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<flow xmlns="http://www.springframework.org/schema/webflow"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
-        start-state="requestQueryForm">
+      start-state="requestQueryForm">
 
     <var name="target" class="com.ubiquitech.leaveTrack.form.RequestQueryForm"/>
 
@@ -18,7 +18,7 @@
         </binder>
         <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
         <transition on="search" to="requestQueryResults">
-        <evaluate expression="requestQueryActions.getRequests(flowRequestContext)"/>
+            <evaluate expression="requestQueryActions.getRequests(flowRequestContext)"/>
         </transition>
     </view-state>
 
@@ -26,14 +26,14 @@
         <transition on="cancel" to="home" validate="false" bind="false"/>
         <transition on="back" to="requestQueryForm" validate="false" bind="false"/>
         <transition on="processRequest" to="selectRequest" validate="false" bind="false"/>
-     </view-state>
+    </view-state>
 
     <action-state id="selectRequest">
         <on-entry>
-            <set name="requestScope.requestId" value="requestParameters.requestId" />
+            <set name="requestScope.requestId" value="requestParameters.requestId"/>
         </on-entry>
-        <evaluate expression="requestQueryActions.selectLeaveRequest(requestId,target)" />
-        <transition to="requestDetails" />
+        <evaluate expression="requestQueryActions.selectLeaveRequest(requestId,target)"/>
+        <transition to="requestDetails"/>
     </action-state>
 
 
@@ -51,8 +51,7 @@
         </binder>
         <transition on="cancel" to="home" validate="false" bind="false"/>
         <transition on="back" to="requestQueryResults" validate="false" bind="false"/>
-     </view-state>
-
+    </view-state>
 
 
     <end-state id="home" view="externalRedirect:home"/>

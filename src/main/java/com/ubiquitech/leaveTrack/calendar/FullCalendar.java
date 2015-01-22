@@ -1,7 +1,7 @@
 package com.ubiquitech.leaveTrack.calendar;
 
 /**
- * Created by vane on 2015/01/16.
+ * vane created on 2015/01/16.
  */
 public class FullCalendar {
     String start;
@@ -9,7 +9,7 @@ public class FullCalendar {
     String title;
     String color;
 
-    public FullCalendar(String color, String title, String start,String end) {
+    public FullCalendar(String color, String title, String start, String end) {
         this.color = color;
         this.title = title;
         this.end = end;

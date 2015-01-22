@@ -8,31 +8,31 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by vane on 2014/11/27.
+ * vane created on 2014/11/27.
  */
 @Entity
-@Table(name="leavedays")
+@Table(name = "leavedays")
 public class LeaveDays implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate yearEmployed;
 
-    private int sickDaysLeft=0;
-    private int sickDaysTotal=0;
-    private int familyDaysLeft=0;
-    private int familyDaysTotal=0;
-    private int maternityDaysLeft=0;
-    private int maternityDaysTotal=0;
-    private int annualDaysLeft=0;
-    private int annualDaysTotal=0;
+    private int sickDaysLeft = 0;
+    private int sickDaysTotal = 0;
+    private int familyDaysLeft = 0;
+    private int familyDaysTotal = 0;
+    private int maternityDaysLeft = 0;
+    private int maternityDaysTotal = 0;
+    private int annualDaysLeft = 0;
+    private int annualDaysTotal = 0;
 
-     @OneToOne(mappedBy ="leaveDays")//maps to the Child table domain as in the Parent table
-     private Employee employee; //Parent table class (Domain)
+    @OneToOne(mappedBy = "leaveDays")//maps to the Child table domain as in the Parent table
+    private Employee employee; //Parent table class (Domain)
 
     public int getMaternityDaysTotal() {
         return maternityDaysTotal;

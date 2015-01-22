@@ -12,9 +12,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by vane on 2014/12/08.
+ * vane created on 2014/12/08.
  */
-
 @Repository
 @SuppressWarnings("unchecked")
 public class RequestImpl implements RequestDao {
@@ -33,9 +32,9 @@ public class RequestImpl implements RequestDao {
         Session session = sessionFactory.openSession();
         Criteria request = session.createCriteria(Request.class);
         Criteria employee = request.createCriteria("employee");
-        Criteria supervisor=employee.createCriteria("supervisor");
-        supervisor.add(Restrictions.eq("id",id));
-        request.add((Restrictions.eq("state",state)));
+        Criteria supervisor = employee.createCriteria("supervisor");
+        supervisor.add(Restrictions.eq("id", id));
+        request.add((Restrictions.eq("state", state)));
         return request.list();
     }
 
@@ -43,10 +42,10 @@ public class RequestImpl implements RequestDao {
     public List getRequestsByStatusAndRequestId(String state, Long id) {
         Session session = sessionFactory.openSession();
         Criteria request = session.createCriteria(Request.class);
-        request.add(Restrictions.eq("id",id));
+        request.add(Restrictions.eq("id", id));
 
-        if(!state.equals("")){
-            request.add(Restrictions.and(Restrictions.eq("state",state)));
+        if (!state.equals("")) {
+            request.add(Restrictions.and(Restrictions.eq("state", state)));
         }
         return request.list();
     }
@@ -55,52 +54,52 @@ public class RequestImpl implements RequestDao {
     public List getRequestsByState(String state) {
         Session session = sessionFactory.openSession();
         Criteria request = session.createCriteria(Request.class);
-        request.add(Restrictions.eq("state",state));
+        request.add(Restrictions.eq("state", state));
         return request.list();
     }
 
     @Override
     public List getQueriedRequests(RequestQueryForm requestQueryForm) {
-        String state=requestQueryForm.getState();
-        String leaveType=requestQueryForm.getLeaveType();
-        String employeeFirstName=requestQueryForm.getEmployeeFirstName();
-        String employeeLastName=requestQueryForm.getEmployeeLastName();
-        String supervisorFirstName=requestQueryForm.getSupervisorFirstName();
-        String supervisorLastName=requestQueryForm.getEmployeeLastName();
-        Long  requestId=requestQueryForm.getRequestId();
+        String state = requestQueryForm.getState();
+        String leaveType = requestQueryForm.getLeaveType();
+        String employeeFirstName = requestQueryForm.getEmployeeFirstName();
+        String employeeLastName = requestQueryForm.getEmployeeLastName();
+        String supervisorFirstName = requestQueryForm.getSupervisorFirstName();
+        String supervisorLastName = requestQueryForm.getEmployeeLastName();
+        Long requestId = requestQueryForm.getRequestId();
 
         Session session = sessionFactory.openSession();
 
         Criteria request = session.createCriteria(Request.class);
-        Criteria employee=request.createCriteria("employee");
-        Criteria supervisor=employee.createCriteria("supervisor");
+        Criteria employee = request.createCriteria("employee");
+        Criteria supervisor = employee.createCriteria("supervisor");
 
-        if(!state.equals("")){
-            request.add(Restrictions.and(Restrictions.eq("state",state)));
+        if (!state.equals("")) {
+            request.add(Restrictions.and(Restrictions.eq("state", state)));
         }
 
-        if(!leaveType.equals("")){
-            request.add(Restrictions.and(Restrictions.eq("leaveType",leaveType)));
+        if (!leaveType.equals("")) {
+            request.add(Restrictions.and(Restrictions.eq("leaveType", leaveType)));
         }
 
-        if(!(requestId==null)){
-            request.add(Restrictions.and(Restrictions.eq("id",requestId)));
+        if (!(requestId == null)) {
+            request.add(Restrictions.and(Restrictions.eq("id", requestId)));
         }
 
-        if(!employeeFirstName.equals("")){
-            employee.add(Restrictions.and(Restrictions.eq("firstName",employeeFirstName)));
+        if (!employeeFirstName.equals("")) {
+            employee.add(Restrictions.and(Restrictions.eq("firstName", employeeFirstName)));
         }
 
-        if(!employeeLastName.equals("")){
-            employee.add(Restrictions.and(Restrictions.eq("lastName",employeeLastName)));
+        if (!employeeLastName.equals("")) {
+            employee.add(Restrictions.and(Restrictions.eq("lastName", employeeLastName)));
         }
 
-        if(!supervisorFirstName.equals("")){
-            supervisor.add(Restrictions.and(Restrictions.eq("firstName",supervisorFirstName)));
+        if (!supervisorFirstName.equals("")) {
+            supervisor.add(Restrictions.and(Restrictions.eq("firstName", supervisorFirstName)));
         }
 
-        if(!supervisorLastName.equals("")){
-            supervisor.add(Restrictions.and(Restrictions.eq("lastName",supervisorLastName)));
+        if (!supervisorLastName.equals("")) {
+            supervisor.add(Restrictions.and(Restrictions.eq("lastName", supervisorLastName)));
         }
 
         return request.list();

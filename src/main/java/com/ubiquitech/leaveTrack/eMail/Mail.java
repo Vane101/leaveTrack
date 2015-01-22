@@ -4,18 +4,18 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 /**
- * Created by vane on 2014/12/04.
+ * vane created on 2014/12/04.
  */
 public class Mail {
 
-     private MailSender mailSender;
+    private MailSender mailSender;
 
-    public void setMailSender(MailSender mailSender){
-        this.mailSender=mailSender;
+    public void setMailSender(MailSender mailSender) {
+        this.mailSender = mailSender;
     }
 
-    public void sendMail(String from,String to,String subject,String message){
-        SimpleMailMessage mailMessage=new SimpleMailMessage();
+    public void sendMail(String from, String to, String subject, String message) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
 
         mailMessage.setFrom(from);
         mailMessage.setTo(to);

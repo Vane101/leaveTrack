@@ -9,24 +9,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by vane on 2014/11/20.
+ * vane created on 2014/11/20.
  */
-
 @Service("employeeService")
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
-   @Autowired
+    @Autowired
     EmployeeDao employeeDao;
 
     @Transactional // this is the only method in this class that needs to be transactional
     @Override
     public void createEmployee(Employee employee) {
-      employeeDao.createEmployee(employee);
+        employeeDao.createEmployee(employee);
     }
 
     @Override
     public List<Object[]> getEmployeeNames() {
-    return employeeDao.getEmployeeNames();
+        return employeeDao.getEmployeeNames();
     }
 
     @Override

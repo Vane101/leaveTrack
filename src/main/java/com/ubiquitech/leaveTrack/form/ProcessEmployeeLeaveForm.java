@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by vane on 2014/12/19.
+ * vane created on 2014/12/19.
  */
 public class ProcessEmployeeLeaveForm implements Serializable {
 
@@ -24,13 +24,13 @@ public class ProcessEmployeeLeaveForm implements Serializable {
     @NotEmpty
     protected Map<String, Object> map;
 
-      public Map<String, Object> getMap() {
+    public Map<String, Object> getMap() {
         return map;
     }
 
     public void setMap(List nextState) {
         map = new HashMap<String, Object>();
-        map.put("nextState",nextState);
+        map.put("nextState", nextState);
     }
 
     public Request getRequest() {

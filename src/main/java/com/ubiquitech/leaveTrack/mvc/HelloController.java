@@ -6,9 +6,7 @@ import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.domain.LeaveDays;
 import com.ubiquitech.leaveTrack.domain.Request;
 import com.ubiquitech.leaveTrack.services.EmployeeService;
-import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
 import com.ubiquitech.leaveTrack.services.RequestService;
-import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -30,24 +28,24 @@ import java.util.Random;
 
 @Controller
 public class HelloController {
-      @Autowired
-      private EmployeeService employeeService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @Autowired
-     private RequestService requestService;
+    private RequestService requestService;
 
     private List<FullCalendar> fullCalendar = new ArrayList<FullCalendar>();
 
-    private boolean calendarBoolean=true;
+    private boolean calendarBoolean = true;
 
- @RequestMapping("/")
-	public ModelAndView index() {
-		return new ModelAndView("index");
-	}
+    @RequestMapping("/")
+    public ModelAndView index() {
+        return new ModelAndView("index");
+    }
 
     @RequestMapping("/setupCalendar")
-    public ModelAndView  setupCalendar() {
-         fullCalendar.clear();
+    public ModelAndView setupCalendar() {
+        fullCalendar.clear();
         List<Request> requestsApproved;
         requestsApproved = requestService.getRequestsByState("Approved");
 
@@ -69,7 +67,7 @@ public class HelloController {
                 FullCalendar fc = new FullCalendar("#" + randomColor, title, startDate, endDate);
                 fullCalendar.add(fc);
             }
-            calendarBoolean=false;
+            calendarBoolean = false;
         }
 
         return new ModelAndView("/calendarView");
@@ -83,13 +81,13 @@ public class HelloController {
 
 
     @RequestMapping("calendar")
-     public void calendar(@RequestParam(required = false)HttpServletRequest request,HttpServletResponse response) {
+    public void calendar(@RequestParam(required = false) HttpServletRequest request, HttpServletResponse response) {
 
         // you might find it easier to use Jackson JSON mapper, which is supported by spring. You can return the object
         // that you want converted to JSON from the method, and spring will automatically convert it to JSON. You just
         // need to add a @ResponseBody annotation to the method.
 
-       //Convert FullCalendar from Java to JSON
+        //Convert FullCalendar from Java to JSON
         Gson gson = new Gson();
         String jsonAppointment = gson.toJson(fullCalendar);
 
@@ -98,30 +96,30 @@ public class HelloController {
         response.setCharacterEncoding("UTF-8");
         try {
             response.getWriter().write(jsonAppointment);
-            } catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    @RequestMapping ("home")
-    public ModelAndView menu(@ModelAttribute Employee employee){
-        calendarBoolean=true;
+    @RequestMapping("home")
+    public ModelAndView menu(@ModelAttribute Employee employee) {
+        calendarBoolean = true;
         return new ModelAndView("home");
     }
 
-   @RequestMapping("index")
+    @RequestMapping("index")
     public ModelAndView getLoginForm(
-            @RequestParam(required = false) String authfailed, String logout,String denied,HttpServletRequest request) {
+            @RequestParam(required = false) String authfailed, String logout, String denied, HttpServletRequest request) {
 
-          String message = "";
+        String message = "";
         if (authfailed != null) {
             message = "Invalid username or password";
-             } else if (logout != null) {
-        HttpSession session = request.getSession();
+        } else if (logout != null) {
+            HttpSession session = request.getSession();
 
-          session.invalidate();
-           message = "Logged Out successfully";
+            session.invalidate();
+            message = "Logged Out successfully";
         } else if (denied != null) {
             message = "Access denied for this user !";
         }
@@ -138,19 +136,19 @@ public class HelloController {
     public ModelAndView checkDetails(HttpServletRequest request) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username=auth.getName();
+        String username = auth.getName();
         Employee employee;
         LeaveDays leaveDays;
 
-       try {
+        try {
             employee = employeeService.getEmployee(username.toUpperCase());
-            HttpSession session=request.getSession(true);
-            session.setAttribute("employeeSession",employee);
-             }catch (Exception e){
-           e.printStackTrace();
+            HttpSession session = request.getSession(true);
+            session.setAttribute("employeeSession", employee);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-          return new ModelAndView("home");
+        return new ModelAndView("home");
 
     }
 

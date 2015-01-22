@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.springapp</groupId>
@@ -72,7 +72,7 @@
         </dependency>
 
         <!-- Hibernate -->
-         <dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
@@ -146,7 +146,7 @@
             <version>${security.version}</version>
         </dependency>
 
-         <!---JODA TIME -->
+        <!---JODA TIME -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -177,7 +177,7 @@
             <version>2.0.6</version>
         </dependency>
 
-       <!-- SLF4J and LogBack -->
+        <!-- SLF4J and LogBack -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

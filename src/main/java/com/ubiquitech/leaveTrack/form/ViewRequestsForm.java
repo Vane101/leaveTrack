@@ -5,7 +5,7 @@ import com.ubiquitech.leaveTrack.domain.Request;
 import java.io.Serializable;
 
 /**
- * Created by vane on 2015/01/16.
+ * vane created on 2015/01/16.
  */
 public class ViewRequestsForm implements Serializable {
 

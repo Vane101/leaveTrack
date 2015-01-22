@@ -11,37 +11,37 @@ import org.springframework.webflow.execution.RequestContext;
 import java.util.List;
 
 /**
- * Created by vane on 2015/01/20.
+ * vane created on 2015/01/20.
  */
 public class RequestQueryActions extends MultiAction {
     private RequestService requestService;
     private EmployeeService employeeService;
     private List<Request> requestsFound;
-    private   List<Request>  requestSelected;
+    private List<Request> requestSelected;
 
-    public Event getRequests(RequestContext context){
+    public Event getRequests(RequestContext context) {
 
-        RequestQueryForm form=(RequestQueryForm) context.getFlowScope().get("target");
-        requestsFound=requestService.getQueriedRequests(form);
+        RequestQueryForm form = (RequestQueryForm) context.getFlowScope().get("target");
+        requestsFound = requestService.getQueriedRequests(form);
         context.getFlowScope().put("requestsFound", requestsFound);
         return success();
     }
 
-    public Event selectLeaveRequest(int requestId,RequestQueryForm form){
+    public Event selectLeaveRequest(int requestId, RequestQueryForm form) {
 
-        requestSelected = requestService.getRequestsByStatusAndRequestId("",(long)requestId);
+        requestSelected = requestService.getRequestsByStatusAndRequestId("", (long) requestId);
         form.setRequest(requestSelected.get(0));
-        form.setEmployeeFullName(form.getRequest().getEmployee().getFirstName()+" "+ form.getRequest().getEmployee().getLastName());
-        form.setSupervisorFullName(form.getRequest().getEmployee().getSupervisor().getFirstName()+" "+form.getRequest().getEmployee().getSupervisor().getLastName());
+        form.setEmployeeFullName(form.getRequest().getEmployee().getFirstName() + " " + form.getRequest().getEmployee().getLastName());
+        form.setSupervisorFullName(form.getRequest().getEmployee().getSupervisor().getFirstName() + " " + form.getRequest().getEmployee().getSupervisor().getLastName());
         return success();
     }
 
     public void setEmployeeService(EmployeeService employeeService) {
-            this.employeeService = employeeService;
-        }
+        this.employeeService = employeeService;
+    }
 
-        public void setRequestService(RequestService requestService) {
-            this.requestService = requestService;
-        }
+    public void setRequestService(RequestService requestService) {
+        this.requestService = requestService;
+    }
 
 }

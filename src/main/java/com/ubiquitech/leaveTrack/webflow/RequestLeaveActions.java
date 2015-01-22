@@ -5,9 +5,7 @@ import com.ubiquitech.leaveTrack.domain.Request;
 import com.ubiquitech.leaveTrack.eMail.Mail;
 import com.ubiquitech.leaveTrack.form.RequestLeaveForm;
 import com.ubiquitech.leaveTrack.services.EmployeeService;
-import com.ubiquitech.leaveTrack.services.EmployeeServiceImpl;
 import com.ubiquitech.leaveTrack.services.RequestService;
-import com.ubiquitech.leaveTrack.services.RequestServiceImpl;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
@@ -24,17 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vane on 2014/12/08.
+ * vane created on 2014/12/08.
  */
 public class RequestLeaveActions extends MultiAction {
-      private RequestService requestService;
-      private EmployeeService employeeService;
-      final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy/MM/dd");
-      final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
+    final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy/MM/dd");
+    final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
+    private RequestService requestService;
+    private EmployeeService employeeService;
     @Autowired
     private Mail mail;
 
-    public Event setupSupervisorOptions(RequestLeaveForm form){
+    public Event setupSupervisorOptions(RequestLeaveForm form) {
         form.getRequest().setComment("");
         form.getRequest().setState("Logged");
         List<String> leaveTypes = new ArrayList<String>();
@@ -51,8 +49,8 @@ public class RequestLeaveActions extends MultiAction {
         Event event = null;
         try {
             form.getRequest().setStartDate(dateFormat.parseLocalDate(form.getStartDate()));
-        }catch (Exception e){
-            MessageBuilder errorMessageBuilder= new MessageBuilder().error();
+        } catch (Exception e) {
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("startDate");
             errorMessageBuilder.code("wrongDateFormat");
             messageContext.addMessage(errorMessageBuilder.build());
@@ -62,8 +60,8 @@ public class RequestLeaveActions extends MultiAction {
         try {
             form.getRequest().setEndDate(dateFormat.parseLocalDate(form.getEndDate()));
             return success();
-        }catch (Exception e){
-            MessageBuilder errorMessageBuilder= new MessageBuilder().error();
+        } catch (Exception e) {
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("endDate");
             errorMessageBuilder.code("wrongDateFormat");
             messageContext.addMessage(errorMessageBuilder.build());
@@ -72,30 +70,30 @@ public class RequestLeaveActions extends MultiAction {
     }
 
     public Event apply(RequestLeaveForm form, SharedAttributeMap map) {
-       Employee employee =(Employee)map.get("employeeSession");
+        Employee employee = (Employee) map.get("employeeSession");
         Request request = form.getRequest();
-     //   request.setSupervisorId(employee.getSupervisor().getId());
+        //   request.setSupervisorId(employee.getSupervisor().getId());
         request.setEmployee(employee);
         requestService.createRequest(request);
         return success();
     }
 
-    public Event sendSupervisorEmail(RequestLeaveForm form,SharedAttributeMap map) {
-        Employee employee =(Employee)map.get("employeeSession");
-        String supervisorEmail= employee.getSupervisor().getEmail();
-       try {
-           mail.sendMail(
+    public Event sendSupervisorEmail(RequestLeaveForm form, SharedAttributeMap map) {
+        Employee employee = (Employee) map.get("employeeSession");
+        String supervisorEmail = employee.getSupervisor().getEmail();
+        try {
+            mail.sendMail(
                 /*FROM:*/ employee.getEmail(),
                   /*TO:*/ supervisorEmail,
              /*SUBJECT:*/  "Leave Request",
              /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getFirstName() + " " + employee.getLastName()
-                   + " has applied for leave, please log into leaveTrack to process this request.");
+                    + " has applied for leave, please log into leaveTrack to process this request.");
             return success();
-       }catch (Exception e){
-           logger.error("Email could not be sent");
-           logger.debug("Debug message",e);
-           return error();
-       }
+        } catch (Exception e) {
+            logger.error("Email could not be sent");
+            logger.debug("Debug message", e);
+            return error();
+        }
 
 
     }

@@ -8,23 +8,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by vane on 2014/12/08.
+ * vane created on 2014/12/08.
  */
-
 @Entity
-@Table(name="request")
+@Table(name = "request")
 public class Request implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="employeeid", referencedColumnName ="id")
+    @JoinColumn(name = "employeeid", referencedColumnName = "id")
     private Employee employee;
 
-    @Column(name="employeeid",insertable = false,updatable = false)
+    @Column(name = "employeeid", insertable = false, updatable = false)
     private long employeeId;
 
     private String timestamp;
@@ -33,9 +32,9 @@ public class Request implements Serializable {
     private String leaveType;
     @NotEmpty
     private String reason;
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate startDate;
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate endDate;
     private String comment;
     @NotEmpty
@@ -57,7 +56,7 @@ public class Request implements Serializable {
         this.endDate = endDate;
     }
 
-     public LocalDate getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 

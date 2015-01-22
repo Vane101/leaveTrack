@@ -18,35 +18,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vane on 2014/12/11.
+ * vane created on 2014/12/11.
  */
 public class SupervisorActions extends MultiAction {
+    final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
     private RequestService requestService;
     private EmployeeService employeeService;
-    private  List<Request> requestsInLoggedStatus;
-    private   List<Request>  requestSelected;
+    private List<Request> requestsInLoggedStatus;
+    private List<Request> requestSelected;
     @Autowired
     private Mail mail;
-    final Logger logger = LoggerFactory.getLogger(RequestLeaveActions.class);
 
-    public Event getLoggedRequests(RequestContext context,SharedAttributeMap map){
-        Employee employee =(Employee)map.get("employeeSession");
-        System.out.println("Employee ID:"+employee.getId());
-        requestsInLoggedStatus =  requestService.getRequestsByStatusAndSupervisorId("Logged",employee.getId());
+    public Event getLoggedRequests(RequestContext context, SharedAttributeMap map) {
+        Employee employee = (Employee) map.get("employeeSession");
+        System.out.println("Employee ID:" + employee.getId());
+        requestsInLoggedStatus = requestService.getRequestsByStatusAndSupervisorId("Logged", employee.getId());
         context.getFlowScope().put("requestsLogged", requestsInLoggedStatus);
         return success();
     }
 
-    public Event selectLeaveRequest(int requestId,ProcessEmployeeLeaveForm form){
+    public Event selectLeaveRequest(int requestId, ProcessEmployeeLeaveForm form) {
 
-        requestSelected =  requestService.getRequestsByStatusAndRequestId("Logged",(long)requestId);
+        requestSelected = requestService.getRequestsByStatusAndRequestId("Logged", (long) requestId);
         form.setRequest(requestSelected.get(0));
         //setting next state options
         List<String> nextState = new ArrayList<String>();
         nextState.add("Approved");
         nextState.add("Rejected");
         form.setMap(nextState);
-        form.setEmployeeFullName(form.getRequest().getEmployee().getFirstName()+" "+ form.getRequest().getEmployee().getLastName());
+        form.setEmployeeFullName(form.getRequest().getEmployee().getFirstName() + " " + form.getRequest().getEmployee().getLastName());
         return success();
     }
 
@@ -56,17 +56,17 @@ public class SupervisorActions extends MultiAction {
         return success();
     }
 
-    public Event sendEmplyeeEmail(ProcessEmployeeLeaveForm form,SharedAttributeMap map) {
+    public Event sendEmplyeeEmail(ProcessEmployeeLeaveForm form, SharedAttributeMap map) {
         Employee employee = (Employee) map.get("employeeSession");
-        String employeeEmail=form.getRequest().getEmployee().getEmail();
-        System.out.println("Employee Email: "+ employeeEmail );
+        String employeeEmail = form.getRequest().getEmployee().getEmail();
+        System.out.println("Employee Email: " + employeeEmail);
         try {
             mail.sendMail(
                 /*FROM:*/ employee.getEmail(),
                   /*TO:*/ employeeEmail,
              /*SUBJECT:*/  "Leave Request",
              /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getFirstName() + " " + employee.getLastName()
-                    + " has "+form.getRequest().getState()+" you leave request, Please log into LeaveTrack for more details");
+                    + " has " + form.getRequest().getState() + " you leave request, Please log into LeaveTrack for more details");
             return success();
         } catch (Exception e) {
             logger.error("Email could not be sent");

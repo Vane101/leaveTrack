@@ -14,7 +14,7 @@ import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
 
 /**
- * Created by vane on 2014/12/02.
+ * vane created on 2014/12/02.
  */
 public class PasswordChangeDatabaseAction extends MultiAction {
     private EmployeeService employeeService;
@@ -26,13 +26,13 @@ public class PasswordChangeDatabaseAction extends MultiAction {
         HashPassword hashPassword = new HashPassword();
 
 
-      ///  HttpServletRequest request=(HttpServletRequest) context.getExternalContext().getNativeRequest();
-        Employee employee =(Employee)map.get("employeeSession");
+        ///  HttpServletRequest request=(HttpServletRequest) context.getExternalContext().getNativeRequest();
+        Employee employee = (Employee) map.get("employeeSession");
         form.setEmployee(employee);
-       // employee=(Employee)request.getSession().getAttribute("employeeSession");
+        // employee=(Employee)request.getSession().getAttribute("employeeSession");
 
-        if (BCrypt.checkpw(form.getOldPassword(),employee.getPassword())) {
-            } else {
+        if (BCrypt.checkpw(form.getOldPassword(), employee.getPassword())) {
+        } else {
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("oldPassword");
             errorMessageBuilder.code("passwordInvalid");
@@ -52,7 +52,6 @@ public class PasswordChangeDatabaseAction extends MultiAction {
             return new EventFactorySupport().error(this);
         }
     }
-
 
 
     public void setEmployeeService(EmployeeService employeeService) {

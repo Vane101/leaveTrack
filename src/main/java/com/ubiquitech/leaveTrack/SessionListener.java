@@ -4,9 +4,9 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * Created by vane on 2014/12/01.
+ * vane created on 2014/12/01.
  */
-public class SessionListener implements HttpSessionListener{
+public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
         System.out.println("session created");
@@ -14,6 +14,6 @@ public class SessionListener implements HttpSessionListener{
 
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-       System.out.println("session destroyed");
+        System.out.println("session destroyed");
     }
 }

@@ -5,10 +5,11 @@
   Time: 02:33 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%--@elvariable id="employeeSession" type="com.ubiquitech.leaveTrack.domain.Employee"--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html
@@ -28,7 +29,8 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Request Query</span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span></p>
+            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+        </p>
     </div>
 
     <div class="form">
@@ -38,20 +40,20 @@
                 <table class="tableFields">
                     <tr>
                         <td class="label">Employee firstname:</td>
-                        <td> <form:input path="employeeFirstName" size="25" /></td>
+                        <td><form:input path="employeeFirstName" size="25"/></td>
                         <td class="label">Employee surname:</td>
-                        <td> <form:input path="employeeLastName" size="25" /></td>
-                   </tr>
+                        <td><form:input path="employeeLastName" size="25"/></td>
+                    </tr>
                     <tr>
                         <td class="label">Supervisor firstname:</td>
-                        <td> <form:input path="supervisorFirstName" size="25" /></td>
+                        <td><form:input path="supervisorFirstName" size="25"/></td>
                         <td class="label">Supervisor surname:</td>
-                        <td> <form:input path="supervisorLastName" size="25" /></td>
+                        <td><form:input path="supervisorLastName" size="25"/></td>
                     </tr>
 
                     <tr>
                         <td class="label">Request ID:</td>
-                        <td><form:input path="requestId" size="25" /></td>
+                        <td><form:input path="requestId" size="25"/></td>
                     </tr>
 
                     <tr>
@@ -77,8 +79,8 @@
                 </table>
             </fieldset>
             <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;  <form:button type="submit" name="_eventId_cancel">Cancel</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp;  <form:button type="submit" name="_eventId_search">Next</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel">Cancel</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_search">Next</form:button>
         </form:form>
         <%@ include file="/resources/theme/footer.jsp" %>
     </div>

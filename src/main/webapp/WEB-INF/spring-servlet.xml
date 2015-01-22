@@ -1,0 +1,99 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.ubiquitech.leaveTrack"/>
+    <!-- Enables the Spring MVC @Controller programming model -->
+    <mvc:annotation-driven conversion-service="conversionService" />
+    <mvc:default-servlet-handler/>
+    <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
+
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+            <property name="cacheSeconds" value="0"/>
+            <property name="useExpiresHeader" value="true"/>
+            <property name="useCacheControlHeader" value="true"/>
+            <property name="useCacheControlNoStore" value="true"/>
+        </bean>
+    </mvc:interceptors>
+
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:annotation-driven/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:config.properties"/>
+    </bean>
+
+    <!-- Beans -->
+    <bean id="employeeDao" class="com.ubiquitech.leaveTrack.dao.EmployeeDaoImpl"/>
+    <bean id="employeeService" class="com.ubiquitech.leaveTrack.services.EmployeeServiceImpl"/>
+    <bean id="requestDao" class="com.ubiquitech.leaveTrack.dao.EmployeeDaoImpl"/>
+    <bean id="requestService" class="com.ubiquitech.leaveTrack.services.RequestServiceImpl"/>
+
+    <!--Reuired for JSR-303 validation -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/><!--Your SQL username -->
+        <property name="password" value="${jdbc.password}"/><!--Your SQL passwword-->
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.ubiquitech.leaveTrack.domain.Employee</value>
+                <value>com.ubiquitech.leaveTrack.domain.LeaveDays</value>
+                <value>com.ubiquitech.leaveTrack.domain.Request</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="${gmail.email}"/><!-- gmail address-->
+        <property name="password" value="${gmail.password}"/><!--Gmail password-->
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mailMail" class="com.ubiquitech.leaveTrack.eMail.Mail">
+        <property name="mailSender" ref="mailSender"/>
+    </bean>
+
+    <import resource="webflowContext.xml"/>
+</beans>

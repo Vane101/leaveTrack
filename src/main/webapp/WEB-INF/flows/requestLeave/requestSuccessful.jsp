@@ -1,4 +1,3 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: vane
@@ -6,9 +5,11 @@
   Time: 08:14 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page session="true"%>
-<html lang="EN" xmlns:jsp="http://java.sun.com/JSP/Page" >
+<%--@elvariable id="employeeSession" type="com.ubiquitech.leaveTrack.domain.Employee"--%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page session="true" %>
+<html lang="EN" xmlns:jsp="http://java.sun.com/JSP/Page">
 
 <head>
     <title>leaveTrack</title>
@@ -19,13 +20,16 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Request Leave</span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span></p>
+            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+        </p>
     </div>
 
     <div class="form">
         <div class="notification">
             <p>Leave request has been logged successfully</p>
+
             <P>The request has been sent to your supervisor for processing</p>
+
             <form action="home">
                 <input type="submit" value="OK">
             </form>

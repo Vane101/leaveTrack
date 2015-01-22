@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<flow xmlns="http://www.springframework.org/schema/webflow"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
       start-state="editEmployeeForm">
 
@@ -23,8 +23,8 @@
         <transition on="next" to="confirmDetails">
             <evaluate expression="editEmployeeDatabaseAction.setSupervisorName(target,messageContext)"/>
             <evaluate expression="editEmployeeDatabaseAction.confirmDetails(flowRequestContext,messageContext)"/>
-         </transition>
-      </view-state>
+        </transition>
+    </view-state>
 
     <view-state id="confirmDetails" model="target">
         <binder>

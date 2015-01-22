@@ -7,4 +7,5 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <br/><br/>
-    <p class="footer">&copy Ubiquitech 2006-2015</p>
+
+<p class="footer">&copy Ubiquitech 2006-2015</p>

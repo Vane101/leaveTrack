@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by vane on 2014/12/04.
+ * vane created on 2014/12/04.
  */
-public class EditEmployeeForm implements Serializable{
-    private static final long serialVersionUID=1L;
+public class EditEmployeeForm implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    protected Map<String,Object> map;
+    protected Map<String, Object> map;
 
     protected String supervisorName;
     protected Integer supervisorID;
 
     @Valid
-    protected Employee employee=new Employee();
+    protected Employee employee = new Employee();
 
     public Employee getEmployee() {
         return employee;
@@ -36,7 +36,7 @@ public class EditEmployeeForm implements Serializable{
 
     public void setMap(List nameList) {
         map = new HashMap<String, Object>();
-        map.put("name",nameList);
+        map.put("name", nameList);
     }
 
     public String getSupervisorName() {

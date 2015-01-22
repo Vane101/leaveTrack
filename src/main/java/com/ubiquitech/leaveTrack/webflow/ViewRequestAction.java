@@ -5,12 +5,12 @@ import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
 
 /**
- * Created by vane on 2015/01/16.
+ * vane created on 2015/01/16.
  */
 public class ViewRequestAction extends MultiAction {
 
-    public Event setupCalendar(RequestContext context){
-       return  success();
+    public Event setupCalendar(RequestContext context) {
+        return success();
 
     }
 }
