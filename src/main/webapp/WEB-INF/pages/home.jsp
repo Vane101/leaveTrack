@@ -25,7 +25,7 @@
             <a href='<c:url value="/editEmployee"/>'><span>Edit Details</span></a> <br> <br>
             <a href='<c:url value="/requestLeave"/>'><span>Request Leave</span></a> <br> <br>
             <a href='<c:url value="/processRequests"/>'><span>Process Requests</span></a> <br> <br>
-            <a href='<c:url value="/setupCalendar"/>'><span>Calendar View</span></a> <br> <br>
+            <a href='<c:url value="setupCalendar"/>'><span>Calendar View</span></a> <br> <br>
             <a href='<c:url value="/requestQuery"/>'><span> Requests Query</span></a> <br> <br>
         </div>
         <%@ include file="/resources/theme/footer.jsp" %>

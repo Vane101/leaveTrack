@@ -31,7 +31,7 @@
             <P>The request has been sent to your supervisor for processing</p>
 
             <form action="home">
-                <input type="submit" value="OK">
+                <input type="submit" value="OK" class="ok-btn">
             </form>
         </div>
         <%@ include file="/resources/theme/footer.jsp" %>

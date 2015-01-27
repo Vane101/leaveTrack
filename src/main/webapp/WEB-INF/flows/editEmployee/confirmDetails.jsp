@@ -88,8 +88,8 @@
                 </table>
             </fieldset>
             <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_back">Back</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_confirm">Confirm</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_back" class="back-btn">Back</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_confirm" class="confirm-btn">Confirm</form:button>
         </form:form>
         <%@ include file="/resources/theme/footer.jsp" %>
     </div>

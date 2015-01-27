@@ -55,8 +55,8 @@
             </table>
 
             <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel">Cancel</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_save">Save</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel" class="cancel-btn">Cancel</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_save" class="save-btn">Save</form:button>
         </form:form>
         <%@ include file="/resources/theme/footer.jsp" %>
     </div>

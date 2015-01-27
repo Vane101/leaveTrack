@@ -27,7 +27,11 @@
     <script src="<c:url value="/resources/fullCalendar/jquery.min.js"/>"></script>
     <script src="<c:url value="/resources/fullCalendar/fullcalendar.js"/>"></script>
 
+    <style>
+        #calendar{font-size:17px !important;}
+    </style>
     <script>
+
         $(document).ready(function () {
 
             var calendar = $('#calendar').fullCalendar({
@@ -37,7 +41,15 @@
                     right: 'month,agendaWeek,agendaDay'
                 },
 
-                select: function (start, end, color, url, allDay) {
+                eventClick: function (calEvent, jsEvent, view) {
+                          $.get("test",{id:calEvent.id},
+                            function(data,status){
+                                                          window.location="calendarEventDetails"
+                            });
+
+              },
+
+                select: function (start, end, color,allDay,id) {
                     var title = prompt('Event Title:');
                     if (title) {
                         calendar.fullCalendar('renderEvent',
@@ -46,15 +58,17 @@
                                     start: start,
                                     end: end,
                                     color: color,
-                                    url: url,
                                     allDay: allDay,
+                                    id:id,
                                     className: 'fc-event-width-overirde'
                                 },
                                 true // make the event "stick"
+
                         );
                     }
                     calendar.fullCalendar('unselect');
                 },
+
                 editable: true,
 
                 eventSources: [
@@ -66,8 +80,8 @@
                             end: 'end',
                             title: 'title',
                             color: 'color',
-                            url: 'url',
                             allDay: 'allDay',
+                            id:'id',
                             className: 'fc-event-width-overirde'
                         },
                         error: function () {
@@ -76,6 +90,7 @@
                     }
                 ]
             });
+
         });
     </script>
 </head>
@@ -92,7 +107,7 @@
     <div class="form">
         <div id="calendar"></div>
         <form action="home">
-            <input type="submit" value="Exit">
+            <input type="submit" value="Cancel" class="cancel-btn">
         </form>
 
         <%@ include file="/resources/theme/footer.jsp" %>

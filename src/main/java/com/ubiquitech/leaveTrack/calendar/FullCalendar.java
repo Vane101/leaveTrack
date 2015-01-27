@@ -8,12 +8,15 @@ public class FullCalendar {
     String end;
     String title;
     String color;
+    long id;
 
-    public FullCalendar(String color, String title, String start, String end) {
+    public FullCalendar(String color, String title, String start, String end,long id) {
         this.color = color;
         this.title = title;
         this.end = end;
         this.start = start;
+
+        this.id=id;
 
     }
 
@@ -47,5 +50,13 @@ public class FullCalendar {
 
     public void setStart(String start) {
         this.start = start;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

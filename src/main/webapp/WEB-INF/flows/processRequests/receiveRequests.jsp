@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>Leave Track</title>
+    <link href="<c:url value="/resources/theme/css/design.css"/>" rel="stylesheet"/>
     <style>
 
         body {
@@ -74,7 +75,7 @@
             </table>
         </fieldset>
         <br/>
-        &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel">Cancel</form:button>
+        &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel" class="cancel-btn">Cancel</form:button>
     </form:form>
 
 </center>

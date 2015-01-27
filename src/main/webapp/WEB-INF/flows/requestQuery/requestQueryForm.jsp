@@ -57,7 +57,7 @@
                     </tr>
 
                     <tr>
-                        <td>State</td>
+                        <td class="label">State</td>
                         <td Class="droplist">
                             <form:select path="state">
                                 <form:option value="" label="Select"/>
@@ -67,7 +67,7 @@
                     </tr>
 
                     <tr>
-                        <td>Leave type</td>
+                        <td class="label">Leave type</td>
                         <td Class="droplist">
                             <form:select path="leaveType">
                                 <form:option value="" label="Select"/>
@@ -79,8 +79,8 @@
                 </table>
             </fieldset>
             <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel">Cancel</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_search">Next</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel" class="cancel-btn">Cancel</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_search" class="ok-btn">Next</form:button>
         </form:form>
         <%@ include file="/resources/theme/footer.jsp" %>
     </div>

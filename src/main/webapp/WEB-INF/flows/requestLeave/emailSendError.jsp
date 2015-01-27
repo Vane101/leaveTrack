@@ -30,7 +30,7 @@
             <P>However an email could not be sent to your supervisor due to technical difficulties</p>
 
             <form action="home">
-                <input type="submit" value="OK">
+                <input type="submit" value="OK" class="ok-btn">
             </form>
         </div>
         <%@ include file="/resources/theme/footer.jsp" %>

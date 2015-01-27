@@ -96,8 +96,8 @@
                 </table>
             </fieldset>
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_back">Back</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_register">Create</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_back" class="back-btn">Back</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_register" class="save-btn">Save</form:button>
         </form:form>
         <%@ include file="/resources/theme/footer.jsp" %>
     </div>

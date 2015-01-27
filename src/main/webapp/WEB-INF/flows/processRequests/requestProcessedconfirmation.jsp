@@ -30,7 +30,7 @@
             <p>An email has been sent to the employee</p>
 
             <form action="home">
-                <input type="submit" value="OK">
+                <input type="submit" value="OK" class="ok-btn">
             </form>
         </div>
         <%@ include file="/resources/theme/footer.jsp" %>
