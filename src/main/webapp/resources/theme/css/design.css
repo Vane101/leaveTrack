@@ -112,13 +112,13 @@ textarea {
 
 .cancel-btn {
     background:lightgray url('../images/cancel.png') right no-repeat;
-    width: 80px;
+    width: 70px;
     height: 30px;
     text-align: left;
 
 }
 .next-btn {
-    width: 80px;
+    width: 60px;
     height: 30px;
     text-align: left;
     background: lightgray url('../images/next.png') no-repeat right;
@@ -126,7 +126,7 @@ textarea {
 .back-btn {
     background: lightgray url('../images/back.png') left no-repeat;
     text-align: right;
-    width: 65px;
+    width: 60px;
     height: 30px;
 }
 .ok-btn {
@@ -138,7 +138,7 @@ textarea {
 
 .confirm-btn {
     background: lightgray url('../images/ok.png') right no-repeat;
-    width: 83px;
+    width: 75px;
     height: 30px;
     text-align: left;
 }

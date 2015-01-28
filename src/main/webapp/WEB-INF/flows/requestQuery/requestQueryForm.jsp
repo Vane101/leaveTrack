@@ -80,7 +80,7 @@
             </fieldset>
             <br/>
             &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel" class="cancel-btn">Cancel</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_search" class="ok-btn">Next</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_search" class="next-btn">Next</form:button>
         </form:form>
         <%@ include file="/resources/theme/footer.jsp" %>
     </div>
