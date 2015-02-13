@@ -34,7 +34,7 @@ public class CreateEmployeeForm implements Serializable {
     }
 
     public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+        this.confirmPassword = confirmPassword.trim();
     }
 
     public Employee getEmployee() {
@@ -59,7 +59,7 @@ public class CreateEmployeeForm implements Serializable {
     }
 
     public void setSupervisorName(String supervisorName) {
-        this.supervisorName = supervisorName;
+        this.supervisorName = supervisorName.toUpperCase().trim();
     }
 
     public String getPassword() {
@@ -67,7 +67,7 @@ public class CreateEmployeeForm implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password.trim();
     }
 
     public String getDateEmployed() {

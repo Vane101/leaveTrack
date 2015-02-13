@@ -32,7 +32,7 @@ public class ChangePasswordForm implements Serializable {
     }
 
     public void setConfirmNewPassword(String confirmNewPassword) {
-        this.confirmNewPassword = confirmNewPassword;
+        this.confirmNewPassword = confirmNewPassword.trim();
     }
 
     public String getNewPassword() {
@@ -40,7 +40,7 @@ public class ChangePasswordForm implements Serializable {
     }
 
     public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+        this.newPassword = newPassword.trim();
     }
 
     public String getOldPassword() {
@@ -48,6 +48,6 @@ public class ChangePasswordForm implements Serializable {
     }
 
     public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
+        this.oldPassword = oldPassword.trim();
     }
 }

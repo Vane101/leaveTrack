@@ -69,7 +69,7 @@ public class Request implements Serializable {
     }
 
     public void setReason(String reason) {
-        this.reason = reason;
+        this.reason = reason.trim();
     }
 
     public String getLeaveType() {

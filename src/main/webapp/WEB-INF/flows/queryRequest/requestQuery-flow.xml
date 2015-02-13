@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
       start-state="requestQueryForm">
 
-    <var name="target" class="com.ubiquitech.leaveTrack.form.RequestQueryForm"/>
+    <var name="target" class="com.ubiquitech.leaveTrack.form.QueryRequestForm"/>
 
     <view-state id="requestQueryForm" model="target">
         <binder>

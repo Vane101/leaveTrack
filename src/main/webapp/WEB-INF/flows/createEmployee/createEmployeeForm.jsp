@@ -62,8 +62,8 @@
                         <td class="error-message"><form:errors path="employee.lastName"/></td>
                     </tr>
                     <tr>
-                        <td class="label">Phone number</td>
-                        <td><form:input path="employee.phoneNumber" size="25"/></td>
+                        <td class="label">Phone number:</td>
+                        <td><form:input path="employee.phoneNumber" size="25" placeholder="27"/></td>
                         <td Class="error-message"><form:errors path="employee.phoneNumber"/></td>
                     </tr>
                     <tr>
@@ -91,12 +91,12 @@
                         <td Class="error-message"><form:errors path="dateEmployed"/></td>
                     </tr>
                     <tr>
-                        <td class="label">Password</td>
+                        <td class="label">Password:</td>
                         <td><form:input path="password" type="password" size="25"/></td>
                         <td Class="error-message"><form:errors path="password"/></td>
                     </tr>
                     <tr>
-                        <td class="label">Confirm password</td>
+                        <td class="label">Confirm password:</td>
                         <td><form:input path="confirmPassword" type="password" size="25"/></td>
                         <td Class="error-message"><form:errors path="confirmPassword"/></td>
                     </tr>

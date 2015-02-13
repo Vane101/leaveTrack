@@ -3,7 +3,7 @@ package com.ubiquitech.leaveTrack.services;
 
 import com.ubiquitech.leaveTrack.dao.RequestDao;
 import com.ubiquitech.leaveTrack.domain.Request;
-import com.ubiquitech.leaveTrack.form.RequestQueryForm;
+import com.ubiquitech.leaveTrack.form.QueryRequestForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,8 +42,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List getQueriedRequests(RequestQueryForm requestQueryForm) {
-        return requestDao.getQueriedRequests(requestQueryForm);
+    public List getQueriedRequests(QueryRequestForm queryRequestForm) {
+        return requestDao.getQueriedRequests(queryRequestForm);
     }
 }
 

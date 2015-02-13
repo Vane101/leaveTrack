@@ -1,7 +1,7 @@
 package com.ubiquitech.leaveTrack.dao;
 
 import com.ubiquitech.leaveTrack.domain.Request;
-import com.ubiquitech.leaveTrack.form.RequestQueryForm;
+import com.ubiquitech.leaveTrack.form.QueryRequestForm;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,14 +59,14 @@ public class RequestImpl implements RequestDao {
     }
 
     @Override
-    public List getQueriedRequests(RequestQueryForm requestQueryForm) {
-        String state = requestQueryForm.getState();
-        String leaveType = requestQueryForm.getLeaveType();
-        String employeeFirstName = requestQueryForm.getEmployeeFirstName();
-        String employeeLastName = requestQueryForm.getEmployeeLastName();
-        String supervisorFirstName = requestQueryForm.getSupervisorFirstName();
-        String supervisorLastName = requestQueryForm.getEmployeeLastName();
-        Long requestId = requestQueryForm.getRequestId();
+    public List getQueriedRequests(QueryRequestForm queryRequestForm) {
+        String state = queryRequestForm.getState();
+        String leaveType = queryRequestForm.getLeaveType();
+        String employeeFirstName = queryRequestForm.getEmployeeFirstName();
+        String employeeLastName = queryRequestForm.getEmployeeLastName();
+        String supervisorFirstName = queryRequestForm.getSupervisorFirstName();
+        String supervisorLastName = queryRequestForm.getEmployeeLastName();
+        Long requestId = queryRequestForm.getRequestId();
 
         Session session = sessionFactory.openSession();
 

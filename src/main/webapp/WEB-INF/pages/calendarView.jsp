@@ -28,7 +28,7 @@
     <script src="<c:url value="/resources/fullCalendar/fullcalendar.js"/>"></script>
 
     <style>
-        #calendar{font-size:17px !important;}
+        #calendar{font-size:14px !important;}
     </style>
     <script>
 
@@ -109,8 +109,8 @@
         <form action="home">
             <input type="submit" value="Cancel" class="cancel-btn">
         </form>
-
         <%@ include file="/resources/theme/footer.jsp" %>
+
     </div>
 </div>
 

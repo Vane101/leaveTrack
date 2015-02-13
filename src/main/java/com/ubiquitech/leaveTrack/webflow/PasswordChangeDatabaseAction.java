@@ -18,18 +18,14 @@ import org.springframework.webflow.execution.RequestContext;
  */
 public class PasswordChangeDatabaseAction extends MultiAction {
     private EmployeeService employeeService;
-    //private Employee employee;
 
     public Event confirmDetails(RequestContext context, MessageContext messageContext, SharedAttributeMap map) {
 
         ChangePasswordForm form = (ChangePasswordForm) context.getFlowScope().get("target");
         HashPassword hashPassword = new HashPassword();
 
-
-        ///  HttpServletRequest request=(HttpServletRequest) context.getExternalContext().getNativeRequest();
         Employee employee = (Employee) map.get("employeeSession");
         form.setEmployee(employee);
-        // employee=(Employee)request.getSession().getAttribute("employeeSession");
 
         if (BCrypt.checkpw(form.getOldPassword(), employee.getPassword())) {
         } else {

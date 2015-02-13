@@ -1,17 +1,16 @@
 package com.ubiquitech.leaveTrack.form;
 
+import com.ubiquitech.leaveTrack.constants.AppConstants;
 import com.ubiquitech.leaveTrack.domain.Request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * vane created on 2015/01/20.
  */
-public class RequestQueryForm implements Serializable {
+public class QueryRequestForm implements Serializable {
     private static final long serialVersionUID = 1L;
     protected Map<String, Object> map = new HashMap<String, Object>();
     protected Request request = new Request();
@@ -30,7 +29,7 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state = state.toUpperCase().trim();
     }
 
     public String getLeaveType() {
@@ -38,7 +37,7 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
+        this.leaveType = leaveType.toUpperCase().trim();
     }
 
     public String getEmployeeFirstName() {
@@ -46,7 +45,7 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setEmployeeFirstName(String employeeFirstName) {
-        this.employeeFirstName = employeeFirstName;
+        this.employeeFirstName = employeeFirstName.toUpperCase().trim();
     }
 
     public String getEmployeeLastName() {
@@ -54,7 +53,7 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setEmployeeLastName(String employeeLastName) {
-        this.employeeLastName = employeeLastName;
+        this.employeeLastName = employeeLastName.toUpperCase().trim();
     }
 
     public String getSupervisorFirstName() {
@@ -62,7 +61,7 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setSupervisorFirstName(String supervisorFirstName) {
-        this.supervisorFirstName = supervisorFirstName;
+        this.supervisorFirstName = supervisorFirstName.toUpperCase().trim();
     }
 
     public String getSupervisorLastName() {
@@ -70,7 +69,7 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setSupervisorLastName(String supervisorLastName) {
-        this.supervisorLastName = supervisorLastName;
+        this.supervisorLastName = supervisorLastName.toUpperCase().trim();
     }
 
     public Long getRequestId() {
@@ -82,25 +81,8 @@ public class RequestQueryForm implements Serializable {
     }
 
     public Map<String, Object> getMap() {
-        List<String> stateList = new ArrayList<String>();
-        stateList.add("Logged");
-        stateList.add("Approved");
-        stateList.add("Rejected");
-
-        List<String> leaveTypeList = new ArrayList<String>();
-        leaveTypeList.add("Annual Leave");
-        leaveTypeList.add("Sick Leave");
-        leaveTypeList.add("Maternity Leave");
-        leaveTypeList.add("Family Leave");
-
-        map = new HashMap<String, Object>();
-        map.put("stateList", stateList);
-        map.put("leaveTypeList", leaveTypeList);
-        return map;
-    }
-
-    public void setMap(Map<String, Object> map) {
-
+        AppConstants map=new AppConstants();
+        return map.getMap();
     }
 
     public Request getRequest() {
@@ -116,7 +98,7 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setEmployeeFullName(String employeeFullName) {
-        this.employeeFullName = employeeFullName;
+        this.employeeFullName = employeeFullName.toUpperCase().trim();
     }
 
     public String getSupervisorFullName() {
@@ -124,6 +106,6 @@ public class RequestQueryForm implements Serializable {
     }
 
     public void setSupervisorFullName(String supervisorFullName) {
-        this.supervisorFullName = supervisorFullName;
+        this.supervisorFullName = supervisorFullName.toUpperCase().trim();
     }
 }

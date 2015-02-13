@@ -22,13 +22,13 @@
         <form action="${loginUrl}" method="post">
             <table>
                 <tr>
-                    <td><%--@declare id="username"--%><label for="username">Username:</label></td>
+                    <td><%--@declare id="username"--%><label for="username" class="label">Username:</label></td>
                     <td><label>
                         <input type="text" name="username" maxlength="25" size="16" required="required" value=""/>
                     </label></td>
                 </tr>
                 <tr>
-                    <td><%--@declare id="password"--%><label for="password">password:</label></td>
+                    <td><%--@declare id="password"--%><label for="password" class="label">password:</label></td>
                     <td><label>
                         <input type="password" name="password" required="required" maxlength="40" size="16" value=""/>
                     </label>

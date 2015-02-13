@@ -1,7 +1,7 @@
 package com.ubiquitech.leaveTrack.webflow;
 
 import com.ubiquitech.leaveTrack.domain.Request;
-import com.ubiquitech.leaveTrack.form.RequestQueryForm;
+import com.ubiquitech.leaveTrack.form.QueryRequestForm;
 import com.ubiquitech.leaveTrack.services.EmployeeService;
 import com.ubiquitech.leaveTrack.services.RequestService;
 import org.springframework.webflow.action.MultiAction;
@@ -13,24 +13,22 @@ import java.util.List;
 /**
  * vane created on 2015/01/20.
  */
-public class RequestQueryActions extends MultiAction {
+public class QueryRequestActions extends MultiAction {
     private RequestService requestService;
     private EmployeeService employeeService;
-    private List<Request> requestsFound;
-    private List<Request> requestSelected;
 
     public Event getRequests(RequestContext context) {
 
-        RequestQueryForm form = (RequestQueryForm) context.getFlowScope().get("target");
-        requestsFound = requestService.getQueriedRequests(form);
+        QueryRequestForm form = (QueryRequestForm) context.getFlowScope().get("target");
+        List requestsFound = requestService.getQueriedRequests(form);
         context.getFlowScope().put("requestsFound", requestsFound);
         return success();
     }
 
-    public Event selectLeaveRequest(int requestId, RequestQueryForm form) {
+    public Event selectLeaveRequest(int requestId, QueryRequestForm form) {
 
-        requestSelected = requestService.getRequestsByStatusAndRequestId("", (long) requestId);
-        form.setRequest(requestSelected.get(0));
+        List requestSelected = requestService.getRequestsByStatusAndRequestId("", (long) requestId);
+        form.setRequest((Request) requestSelected.get(0));
         form.setEmployeeFullName(form.getRequest().getEmployee().getFirstName() + " " + form.getRequest().getEmployee().getLastName());
         form.setSupervisorFullName(form.getRequest().getEmployee().getSupervisor().getFirstName() + " " + form.getRequest().getEmployee().getSupervisor().getLastName());
         return success();

@@ -28,7 +28,7 @@ public class EditEmployeeDatabaseAction extends MultiAction {
 
         List<String> nameList = new ArrayList<String>();
         List<Object[]> employees = employeeService.getEmployeeNames();
-        nameList.add("Select");
+        nameList.add("SELECT");
         for (Object[] employee : employees) {
             String name = employee[1] + " " + employee[2];
             nameList.add(name);

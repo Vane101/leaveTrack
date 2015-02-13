@@ -69,8 +69,8 @@
                     <tr>
                         <td class="label">Next Status</td>
                         <td><form:select path="request.state">
-                            <form:option value="" label="Select"/>
-                            <form:options items="${target.map.nextState}"/>
+                            <form:option value="" label="SELECT"/>
+                            <form:options items="${target.map.stateList}"/>
                         </form:select></td>
                         <td Class="error-message"><form:errors path="request.state"/></td>
                     </tr>

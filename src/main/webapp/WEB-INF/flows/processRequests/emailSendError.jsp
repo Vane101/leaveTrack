@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="true" %>
 <html lang="EN" xmlns:jsp="http://java.sun.com/JSP/Page">
+<%--@elvariable id="employeeSession" type="com.ubiquitech.leaveTrack.domain.Employee"--%>
 
 <head>
     <title>leaveTrack</title>

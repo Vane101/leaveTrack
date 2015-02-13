@@ -53,17 +53,12 @@
         <property name="employeeService" ref="employeeService"/>
     </bean>
 
-    <bean id="processRequestsActions" class="com.ubiquitech.leaveTrack.webflow.ProcessRequestsActions">
-        <property name="requestService" ref="requestService"/>
-        <property name="employeeService" ref="employeeService"/>
-    </bean>
-
     <bean id="supervisorActions" class="com.ubiquitech.leaveTrack.webflow.SupervisorActions">
         <property name="requestService" ref="requestService"/>
         <property name="employeeService" ref="employeeService"/>
     </bean>
 
-    <bean id="requestQueryActions" class="com.ubiquitech.leaveTrack.webflow.RequestQueryActions">
+    <bean id="requestQueryActions" class="com.ubiquitech.leaveTrack.webflow.QueryRequestActions">
         <property name="requestService" ref="requestService"/>
         <property name="employeeService" ref="employeeService"/>
     </bean>

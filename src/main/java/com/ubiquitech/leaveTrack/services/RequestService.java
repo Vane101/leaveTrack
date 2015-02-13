@@ -1,7 +1,7 @@
 package com.ubiquitech.leaveTrack.services;
 
 import com.ubiquitech.leaveTrack.domain.Request;
-import com.ubiquitech.leaveTrack.form.RequestQueryForm;
+import com.ubiquitech.leaveTrack.form.QueryRequestForm;
 
 import java.util.List;
 
@@ -17,6 +17,6 @@ public interface RequestService {
 
     public List getRequestsByState(String status);
 
-    public List getQueriedRequests(RequestQueryForm requestQueryForm);
+    public List getQueriedRequests(QueryRequestForm queryRequestForm);
 }
 

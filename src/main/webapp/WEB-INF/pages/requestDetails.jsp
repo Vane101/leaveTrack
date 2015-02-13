@@ -33,7 +33,7 @@
     </div>
 
     <div class="form">
-        <form action=""><%--@elvariable id="calendarRequest" type="com.ubiquitech.leaveTrack.form.RequestQueryForm"--%>
+        <form action=""><%--@elvariable id="calendarRequest" type="com.ubiquitech.leaveTrack.form.QueryRequestForm"--%>
             <fieldset class="block">
                 <legend>Request Details</legend>
                 <table class="tableFieldsAlignLeft">

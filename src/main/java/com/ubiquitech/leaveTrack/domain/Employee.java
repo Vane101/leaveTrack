@@ -78,7 +78,7 @@ public class Employee implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password.trim();
     }
 
     public String getJobTitle() {
@@ -86,7 +86,7 @@ public class Employee implements Serializable {
     }
 
     public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
+        this.jobTitle = jobTitle.toUpperCase().trim();
     }
 
     public String getEmail() {
@@ -94,7 +94,7 @@ public class Employee implements Serializable {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.trim();
     }
 
     public String getPhoneNumber() {
@@ -102,7 +102,7 @@ public class Employee implements Serializable {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber.trim();
     }
 
     public String getLastName() {
@@ -118,7 +118,7 @@ public class Employee implements Serializable {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.toUpperCase().trim();
     }
 
     public String getUsername() {

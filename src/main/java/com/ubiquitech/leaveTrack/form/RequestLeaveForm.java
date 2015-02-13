@@ -1,12 +1,11 @@
 package com.ubiquitech.leaveTrack.form;
 
+import com.ubiquitech.leaveTrack.constants.AppConstants;
 import com.ubiquitech.leaveTrack.domain.Request;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +17,6 @@ public class RequestLeaveForm implements Serializable {
     @Valid
     protected Request request = new Request();
 
-    @NotEmpty
     protected Map<String, Object> map;
 
     @NotEmpty
@@ -46,13 +44,10 @@ public class RequestLeaveForm implements Serializable {
     }
 
     public Map<String, Object> getMap() {
-        return map;
+        AppConstants map=new AppConstants();
+        return map.getMap();
     }
 
-    public void setMap(List leaveType) {
-        map = new HashMap<String, Object>();
-        map.put("leaveType", leaveType);
-    }
 
     public Request getRequest() {
         return request;
@@ -66,7 +61,7 @@ public class RequestLeaveForm implements Serializable {
         return employeeName;
     }
 
-    public void setEmployeeName(String empployeeName) {
-        this.employeeName = empployeeName;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName.toUpperCase().trim();
     }
 }

@@ -1,8 +1,11 @@
 package com.ubiquitech.leaveTrack.calendar;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+
 /**
  * vane created on 2015/01/16.
  */
+@ResponseBody
 public class FullCalendar {
     String start;
     String end;

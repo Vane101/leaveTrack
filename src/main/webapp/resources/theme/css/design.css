@@ -10,7 +10,7 @@
 
 body {
     display: block;
-    font-size:17px;
+    font-size:20px;
 }
 
 .applicationBody {
@@ -24,8 +24,24 @@ body {
     border-left: 1px solid;
     border-right: 1px solid;
     border-bottom: 1px solid;
+
 }
 
+
+.tableBody {
+    background-color: #f2f0e3;
+    font-family: arial, verdana, sans-serif;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    font-size: 14px;
+    color: black;
+
+}
 .calendarApplicationBody {
     font-family: arial, verdana, sans-serif;
     background-color: #f2f0e3;
@@ -42,16 +58,19 @@ body {
 .form {
     padding: 1em;
     font-size: 15px;
+
 }
 
 .heading {
-    background-color: darkblue;
+    background-color: #000099;
     color: white;
     text-align: center;
+    padding-left:1em;
+    padding-right:1em;
 }
 
 table {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .headingLeft {
@@ -69,7 +88,7 @@ table {
 
 .label {
     text-align: right;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .notification {
@@ -80,7 +99,7 @@ table {
 .tableFields {
     text-align: right;
     position: relative;
-    font-size:25px;
+    font-size:30px;
 }
 
 .tableFieldsAlignLeft {
@@ -106,46 +125,61 @@ textarea {
     font-size: 18px;
     color: white;
     font: bold;
-    background-color: blue;
+    background-color: #000099;
     border: thick;
 }
 
 .cancel-btn {
-    background:lightgray url('../images/cancel.png') right no-repeat;
+    border-radius: 5px;
+    border-color: gray;
+    background:lightgray url('../images/cancel.png') left no-repeat;
     width: 70px;
     height: 30px;
-    text-align: left;
+    text-align: right;
 
 }
 .next-btn {
+    border-radius: 5px;
+    border-color: gray;
     width: 60px;
     height: 30px;
     text-align: left;
     background: lightgray url('../images/next.png') no-repeat right;
 }
 .back-btn {
+    border-radius: 5px;
+    border-color: gray;
     background: lightgray url('../images/back.png') left no-repeat;
     text-align: right;
     width: 60px;
     height: 30px;
 }
 .ok-btn {
-    background: lightgray url('../images/ok.png') right no-repeat;
+    border-radius: 5px;
+    border-color: gray;
+    background: lightgray url('../images/ok.png') left no-repeat;
     width: 70px;
     height: 30px;
-    text-align: left;
+    text-align: right;
 }
 
 .confirm-btn {
-    background: lightgray url('../images/ok.png') right no-repeat;
+    border-radius: 5px;
+    border-color: gray;
+    background: lightgray url('../images/ok.png') left no-repeat;
     width: 75px;
     height: 30px;
-    text-align: left;
+    text-align: right;
 }
 
 .save-btn {
-    background: lightgray url('../images/save.png') right no-repeat;
-    text-align: left;
+    border-radius: 5px;
+    border-color: gray;
+    background: lightgray url('../images/save.png') left no-repeat;
+    text-align: right;
     width: 65px;
     height: 30px;
+}
+td{
+    font-size: 25px;
 }

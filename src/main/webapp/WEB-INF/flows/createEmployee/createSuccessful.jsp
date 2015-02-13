@@ -28,12 +28,8 @@
     <div class="form">
         <div class="notification">
             <p>Employee successfully created </p>
-
-            <P>New employee can now log into LeaveTrack</p>
-
-            <form action="${logoutUrl}" method="post">
-                <input type="submit" value="Log out" class="ok-btn"/>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <form action="home">
+                <input type="submit" value="OK" class="ok-btn">
             </form>
         </div>
         <%@ include file="/resources/theme/footer.jsp" %>

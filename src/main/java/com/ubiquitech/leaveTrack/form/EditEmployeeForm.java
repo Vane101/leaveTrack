@@ -44,7 +44,7 @@ public class EditEmployeeForm implements Serializable {
     }
 
     public void setSupervisorName(String supervisorName) {
-        this.supervisorName = supervisorName;
+        this.supervisorName = supervisorName.toUpperCase().trim();
     }
 
     public Integer getSupervisorID() {

@@ -1,11 +1,13 @@
 package com.ubiquitech.leaveTrack.webflow;
 
+import com.ubiquitech.leaveTrack.constants.AppConstants;
 import com.ubiquitech.leaveTrack.domain.Employee;
 import com.ubiquitech.leaveTrack.domain.Request;
 import com.ubiquitech.leaveTrack.eMail.Mail;
 import com.ubiquitech.leaveTrack.form.RequestLeaveForm;
 import com.ubiquitech.leaveTrack.services.EmployeeService;
 import com.ubiquitech.leaveTrack.services.RequestService;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
@@ -17,9 +19,6 @@ import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.action.MultiAction;
 import org.springframework.webflow.core.collection.SharedAttributeMap;
 import org.springframework.webflow.execution.Event;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * vane created on 2014/12/08.
@@ -34,21 +33,18 @@ public class RequestLeaveActions extends MultiAction {
 
     public Event setupSupervisorOptions(RequestLeaveForm form) {
         form.getRequest().setComment("");
-        form.getRequest().setState("Logged");
-        List<String> leaveTypes = new ArrayList<String>();
-        leaveTypes.add("Annual Leave");
-        leaveTypes.add("Sick Leave");
-        leaveTypes.add("Maternity Leave");
-        leaveTypes.add("Family Leave");
-        form.setMap(leaveTypes);
+        form.getRequest().setState(AppConstants.requestStateEnum.LOGGED.toString());
         return success();
     }
 
     public Event confirmDetails(RequestLeaveForm form, MessageContext messageContext) {
 
+        LocalDate startDate;
+        LocalDate endDate;
         Event event = null;
         try {
-            form.getRequest().setStartDate(dateFormat.parseLocalDate(form.getStartDate()));
+            startDate=dateFormat.parseLocalDate(form.getStartDate());
+            form.getRequest().setStartDate(startDate);
         } catch (Exception e) {
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("startDate");
@@ -58,12 +54,23 @@ public class RequestLeaveActions extends MultiAction {
         }
 
         try {
-            form.getRequest().setEndDate(dateFormat.parseLocalDate(form.getEndDate()));
-            return success();
+            endDate=dateFormat.parseLocalDate(form.getEndDate());
+            form.getRequest().setEndDate(endDate);
+
         } catch (Exception e) {
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("endDate");
             errorMessageBuilder.code("wrongDateFormat");
+            messageContext.addMessage(errorMessageBuilder.build());
+            return new EventFactorySupport().error(this);
+        }
+
+          if(endDate.isAfter(startDate)){
+            return success();
+        }else{
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("endDate");
+            errorMessageBuilder.code("invalidEndDate");
             messageContext.addMessage(errorMessageBuilder.build());
             return new EventFactorySupport().error(this);
         }
@@ -72,7 +79,7 @@ public class RequestLeaveActions extends MultiAction {
     public Event apply(RequestLeaveForm form, SharedAttributeMap map) {
         Employee employee = (Employee) map.get("employeeSession");
         Request request = form.getRequest();
-        //   request.setSupervisorId(employee.getSupervisor().getId());
+
         request.setEmployee(employee);
         requestService.createRequest(request);
         return success();

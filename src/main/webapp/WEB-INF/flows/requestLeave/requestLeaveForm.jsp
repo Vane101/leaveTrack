@@ -31,7 +31,11 @@
         $(function () {
             $("#dateTo").datepicker({dateFormat: 'yy/mm/dd'});
         });
+
     </script>
+    <style type = "text/css">
+        .ui-datepicker { font-size:15pt !important}
+    </style>
 </head>
 
 <body>
@@ -52,7 +56,7 @@
                         <td class="label">Request Type:</td>
                         <td><form:select path="request.leaveType">
                             <form:option value="" label="Select"/>
-                            <form:options items="${target.map.leaveType}"/>
+                            <form:options items="${target.map.leaveTypeList}"/>
                         </form:select>
                         </td>
                         <td Class="error-message"><form:errors path="request.leaveType"/></td>

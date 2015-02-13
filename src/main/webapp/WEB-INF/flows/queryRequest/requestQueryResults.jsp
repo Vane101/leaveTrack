@@ -17,6 +17,7 @@
     <link href="<c:url value="/resources/theme/css/design.css"/>" rel="stylesheet"/>
     <style>
 
+
         td {
             font-size: 15px;
             color: black;
@@ -48,7 +49,7 @@
 
         <form:form method="post" commandName="target" action="${flowExecutionUrl}">
             <fieldset class="block">
-                <legend>Leave Request</legend>
+                <legend>Leave Requests</legend>
                 <table class="tableFields" border="1" style="width:100%">
                     <tr>
                         <td class="heading">Action</td>
@@ -60,11 +61,12 @@
                         <td class="heading">End Date</td>
                         <td class="heading">Status</td>
                     </tr>
-                        <%--@elvariable id="requestsLogged" type="java.util.List"--%>
-                    <c:forEach var="requests" items="${requestsLogged}">
+
+                        <%--@elvariable id="requestsFound" type="java.util.List"--%>
+                    <c:forEach var="requests" items="${requestsFound}">
                         <tr>
                             <td>
-                                <a href="${flowExecutionUrl}&_eventId=processRequest&requestId=${requests.id}">Process</a>
+                                <a href="${flowExecutionUrl}&_eventId=processRequest&requestId=${requests.id}">Details</a>
                             </td>
 
                             <td>${requests.employee.firstName} ${requests.employee.lastName}</td>
@@ -80,8 +82,9 @@
                 </table>
             </fieldset>
             <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel"
-                                                  class="cancel-btn">Cancel</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_back" class="back-btn" >Back</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel" class="cancel-btn">Cancel</form:button>
+
         </form:form>
     </div>
 </div>
