@@ -36,7 +36,7 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Edit Employee </span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
@@ -53,16 +53,10 @@
                     <tr>
                         <td class="label">First name:</td>
                         <td><label>
-                            <input type="text" value="${target.employee.firstName}" readonly class="readOnlyText">
+                            <input type="text" value="${target.employee.employeeName}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
-                    <tr>
-                        <td class="label">Last name:</td>
-                        <td><label>
-                            <input type="text" value="${target.employee.lastName}" readonly class="readOnlyText">
-                        </label></td>
-                    </tr>
-                    <tr>
+                             <tr>
                         <td class="label">Phone Number:</td>
                         <td><label>
                             <input type="text" value="${target.employee.phoneNumber}" readonly class="readOnlyText">

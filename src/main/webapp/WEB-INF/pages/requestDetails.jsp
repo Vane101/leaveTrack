@@ -28,7 +28,7 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Query Requests</span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
@@ -41,14 +41,14 @@
                     <tr>
                         <td class="label">Employee name</td>
                         <td><label>
-                            <input type="text" value="${calendarRequest.employeeFullName}" readonly class="readOnlyText">
+                            <input type="text" value="${calendarRequest.employeeName}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
 
                     <tr>
                         <td class="label">Supervisor name</td>
                         <td><label>
-                            <input type="text" value="${calendarRequest.supervisorFullName}" readonly class="readOnlyText">
+                            <input type="text" value="${calendarRequest.supervisorName}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
 

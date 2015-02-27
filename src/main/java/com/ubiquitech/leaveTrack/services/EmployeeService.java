@@ -1,6 +1,7 @@
 package com.ubiquitech.leaveTrack.services;
 
 import com.ubiquitech.leaveTrack.domain.Employee;
+import com.ubiquitech.leaveTrack.form.QueryEmployeeForm;
 
 import java.util.List;
 
@@ -17,5 +18,7 @@ public interface EmployeeService {
     public Employee getEmployee(String username);
 
     public Employee getEmployeeById(Long id);
+
+    public List getQueriedEmployees(QueryEmployeeForm queryEmployeeForm);
 
 }

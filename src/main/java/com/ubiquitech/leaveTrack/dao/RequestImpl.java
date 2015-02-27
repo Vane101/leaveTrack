@@ -9,7 +9,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * vane created on 2014/12/08.
@@ -62,47 +64,65 @@ public class RequestImpl implements RequestDao {
     public List getQueriedRequests(QueryRequestForm queryRequestForm) {
         String state = queryRequestForm.getState();
         String leaveType = queryRequestForm.getLeaveType();
-        String employeeFirstName = queryRequestForm.getEmployeeFirstName();
-        String employeeLastName = queryRequestForm.getEmployeeLastName();
-        String supervisorFirstName = queryRequestForm.getSupervisorFirstName();
-        String supervisorLastName = queryRequestForm.getEmployeeLastName();
+        String employeeName = queryRequestForm.getEmployeeName();
+        String supervisorName = queryRequestForm.getSupervisorName();
         Long requestId = queryRequestForm.getRequestId();
 
-        Session session = sessionFactory.openSession();
-
-        Criteria request = session.createCriteria(Request.class);
-        Criteria employee = request.createCriteria("employee");
-        Criteria supervisor = employee.createCriteria("supervisor");
+        Map<String,Object> parms = new HashMap<String,Object>();
+        StringBuffer hql= new StringBuffer("from Request state");
+        boolean first=true;
 
         if (!state.equals("")) {
-            request.add(Restrictions.and(Restrictions.eq("state", state)));
+            hql.append(first ? " where " : " and ");
+            hql.append("q.state = :state");
+            parms.put("state",state);
+            first=false;
         }
 
         if (!leaveType.equals("")) {
-            request.add(Restrictions.and(Restrictions.eq("leaveType", leaveType)));
+            hql.append(first ? " where " : " and ");
+            hql.append("q.leaveType = :leaveType");
+            parms.put("leaveType",leaveType);
+            first=false;
         }
 
-        if (!(requestId == null)) {
-            request.add(Restrictions.and(Restrictions.eq("id", requestId)));
+        if (!employeeName.equals("")) {
+            hql.append(first ? " where " : " and ");
+            hql.append("q.employee.employeeName = :employeeName");
+            parms.put("employeeName",employeeName);
+            first=false;
         }
 
-        if (!employeeFirstName.equals("")) {
-            employee.add(Restrictions.and(Restrictions.eq("firstName", employeeFirstName)));
+        if (!supervisorName.equals("")) {
+            hql.append(first ? " where " : " and ");
+            hql.append("q.employee.supervisor.employeeName = :supervisorName");
+            parms.put("supervisorName",supervisorName);
+            first=false;
         }
 
-        if (!employeeLastName.equals("")) {
-            employee.add(Restrictions.and(Restrictions.eq("lastName", employeeLastName)));
+        if (!(requestId ==null)) {
+            hql.append(first ? " where " : " and ");
+            hql.append("q.requestId = :requestId");
+            parms.put("requestId",requestId);
+            first=false;
         }
 
-        if (!supervisorFirstName.equals("")) {
-            supervisor.add(Restrictions.and(Restrictions.eq("firstName", supervisorFirstName)));
+        org.hibernate.Query query = sessionFactory.getCurrentSession().createQuery(hql.toString());
+        for (String name : parms.keySet()) {
+            Object value = parms.get(name);
+            query.setParameter(name, value);
         }
 
-        if (!supervisorLastName.equals("")) {
-            supervisor.add(Restrictions.and(Restrictions.eq("lastName", supervisorLastName)));
-        }
+        return query.list();
+    }
 
-        return request.list();
+    @Override
+    public List getRequestByEmployeeId(Long id) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from Request e where  e.employee.id = :val")
+                .setParameter("val", id)
+                .list();
+
     }
 
 }

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: vane
-  Date: 2014/11/20
-  Time: 02:13 PM
+  Date: 2015/02/26
+  Time: 06:32 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="employeeSession" type="com.ubiquitech.leaveTrack.domain.Employee"--%>
@@ -27,76 +27,77 @@
 <div class="applicationBody">
 
     <div class="heading">
-        <p>&nbsp<span class="headingLeft">Create New Employee </span>
+        <p>&nbsp<span class="headingLeft">Employee Query</span>
             <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
     <div class="form">
-        <div class="notification">
-            <p>Please verify the following data is correct. Press
-                the "Back" button to make any necessary changes.
-            </p>
-        </div>
-
         <form:form method="post" commandName="target" action="${flowExecutionUrl}">
             <fieldset class="block">
-                <legend>Confirm Details</legend>
-                <table>
+                <legend>Employee Details</legend>
+                <table class="tableFieldsAlignLeft">
                     <tr>
-                        <td class="label">Username:</td>
+                        <td class="label">Username</td>
                         <td><label>
                             <input type="text" value="${target.employee.username}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
+
                     <tr>
-                        <td class="label">Employee name:</td>
+                        <td class="label">Employee name</td>
                         <td><label>
                             <input type="text" value="${target.employee.employeeName}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
 
                     <tr>
-                        <td class="label">Phone Number:</td>
+                        <td class="label">Supervisor name</td>
+                        <td><label>
+                            <input type="text" value="${target.employee.supervisor.employeeName}" readonly class="readOnlyText">
+                        </label></td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">Phone number</td>
                         <td><label>
                             <input type="text" value="${target.employee.phoneNumber}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
+
                     <tr>
-                        <td class="label">Email:</td>
+                        <td class="label">Email</td>
                         <td><label>
-                            <input type="text" value="${target.employee.email}" readonly class="readOnlyText">
+                            <input type="text" value="${target.employee}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
+
                     <tr>
-                        <td class="label">Job Title:</td>
+                        <td class="label">Job title</td>
                         <td><label>
                             <input type="text" value="${target.employee.jobTitle}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
+
                     <tr>
-                        <td class="label">Supervisor:</td>
+                        <td class="label">Date employed</td>
                         <td><label>
-                            <input type="text" value="${target.supervisorName}" readonly class="readOnlyText">
-                        </label></td>
-                    </tr>
-                    <tr>
-                        <td class="label">Date employed:</td>
-                        <td><label>
-                            <input type="text" value="${target.employee.leaveDays.yearEmployed}" readonly
-                                   class="readOnlyText">
+                            <input type="text" value="${target.employee.leaveDays.yearEmployed}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
 
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="history-link"><a href="${flowExecutionUrl}&_eventId=getEmployeeRequests&employeeId=${target.employee.id}">View Leave History</a></td>
+                    </tr>
                 </table>
+
             </fieldset>
-            <br>
+            <br/>
             &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_back" class="back-btn">Back</form:button>
-            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_register" class="save-btn">Save</form:button>
+            &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel" class="cancel-btn">Cancel</form:button>
         </form:form>
-        <%@ include file="/resources/theme/footer.jsp" %>
+        <%@ include file="/resources/theme/footer.jsp"%>
     </div>
 </div>
-
-</body>
-</html>

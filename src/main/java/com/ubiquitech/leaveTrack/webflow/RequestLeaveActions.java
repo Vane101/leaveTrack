@@ -32,7 +32,7 @@ public class RequestLeaveActions extends MultiAction {
     private Mail mail;
 
     public Event setupSupervisorOptions(RequestLeaveForm form) {
-        form.getRequest().setComment("");
+        form.getRequest().setComment("LOGGED");
         form.getRequest().setState(AppConstants.requestStateEnum.LOGGED.toString());
         return success();
     }
@@ -93,7 +93,7 @@ public class RequestLeaveActions extends MultiAction {
                 /*FROM:*/ employee.getEmail(),
                   /*TO:*/ supervisorEmail,
              /*SUBJECT:*/  "Leave Request",
-             /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getFirstName() + " " + employee.getLastName()
+             /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getEmployeeName()
                     + " has applied for leave, please log into leaveTrack to process this request.");
             return success();
         } catch (Exception e) {

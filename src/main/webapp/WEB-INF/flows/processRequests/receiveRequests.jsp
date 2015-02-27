@@ -18,7 +18,7 @@
     <style>
 
         td {
-            font-size: 15px;
+            font-size: 13px;
             color: black;
             width: 100px;
             height: 22px;
@@ -40,7 +40,7 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Request Leave</span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
@@ -67,7 +67,7 @@
                                 <a href="${flowExecutionUrl}&_eventId=processRequest&requestId=${requests.id}">Process</a>
                             </td>
 
-                            <td>${requests.employee.firstName} ${requests.employee.lastName}</td>
+                            <td>${requests.employee.employeeName}</td>
                             <td>${requests.timestamp}</td>
                             <td>${requests.leaveType}</td>
                             <td>${requests.reason}</td>

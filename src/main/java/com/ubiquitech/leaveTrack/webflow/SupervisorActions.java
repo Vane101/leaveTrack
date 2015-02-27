@@ -38,7 +38,6 @@ public class SupervisorActions extends MultiAction {
 
         List requestSelected = requestService.getRequestsByStatusAndRequestId(AppConstants.requestStateEnum.LOGGED.toString(), (long) requestId);
         form.setRequest((Request) requestSelected.get(0));
-        form.setEmployeeFullName(form.getRequest().getEmployee().getFirstName() + " " + form.getRequest().getEmployee().getLastName());
         return success();
     }
 
@@ -56,7 +55,7 @@ public class SupervisorActions extends MultiAction {
                 /*FROM:*/ employee.getEmail(),
                   /*TO:*/ employeeEmail,
              /*SUBJECT:*/  "Leave Request",
-             /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getFirstName() + " " + employee.getLastName()
+             /*MESSAGE:*/  "==========This is an automatically generated Email, Please do not reply.==========\n" + employee.getEmployeeName()
                     + " has " + form.getRequest().getState() + " your leave request, Please log into LeaveTrack for more details");
             return success();
         } catch (Exception e) {

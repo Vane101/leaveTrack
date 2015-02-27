@@ -18,5 +18,8 @@ public interface RequestService {
     public List getRequestsByState(String status);
 
     public List getQueriedRequests(QueryRequestForm queryRequestForm);
-}
+
+    public List getRequestByEmployeeId( Long id);
+
+  }
 

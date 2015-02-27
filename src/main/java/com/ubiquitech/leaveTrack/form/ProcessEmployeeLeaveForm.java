@@ -17,8 +17,6 @@ public class ProcessEmployeeLeaveForm implements Serializable {
     @Valid
     protected Request request = new Request();
 
-    protected String employeeFullName;
-
     protected Map<String, Object> map;
 
     public Map<String, Object> getMap() {
@@ -34,11 +32,5 @@ public class ProcessEmployeeLeaveForm implements Serializable {
         this.request = request;
     }
 
-    public String getEmployeeFullName() {
-        return employeeFullName;
-    }
 
-    public void setEmployeeFullName(String employeeFullName) {
-        this.employeeFullName = employeeFullName;
-    }
 }

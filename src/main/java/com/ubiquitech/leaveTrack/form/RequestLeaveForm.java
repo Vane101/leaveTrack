@@ -48,7 +48,6 @@ public class RequestLeaveForm implements Serializable {
         return map.getMap();
     }
 
-
     public Request getRequest() {
         return request;
     }

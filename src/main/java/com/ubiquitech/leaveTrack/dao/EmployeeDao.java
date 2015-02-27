@@ -1,6 +1,7 @@
 package com.ubiquitech.leaveTrack.dao;
 
 import com.ubiquitech.leaveTrack.domain.Employee;
+import com.ubiquitech.leaveTrack.form.QueryEmployeeForm;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface EmployeeDao {
     Employee getEmployee(String username);
 
     Employee getEmployeeById(Long id);
+    public List getQueriedEmployees(QueryEmployeeForm queryEmployeeForm);
+
 }

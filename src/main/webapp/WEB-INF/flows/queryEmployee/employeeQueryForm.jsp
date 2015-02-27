@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: vane
-  Date: 2015/01/20
-  Time: 02:33 PM
+  Date: 2015/02/23
+  Time: 03:51 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="employeeSession" type="com.ubiquitech.leaveTrack.domain.Employee"--%>
@@ -28,7 +28,7 @@
 <div class="applicationBody">
 
     <div class="heading">
-        <p>&nbsp<span class="headingLeft">Request Query</span>
+        <p>&nbsp<span class="headingLeft">Employee Query</span>
             <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
@@ -36,8 +36,12 @@
     <div class="form">
         <form:form method="post" commandName="target" action="${flowExecutionUrl}">
             <fieldset class="block">
-                <legend>Search for requests</legend>
+                <legend>Search for employee</legend>
                 <table class="tableFields">
+                    <tr>
+                        <td class="label">Employee username:</td>
+                        <td><form:input path="username" size="25"/></td>
+                    </tr>
                     <tr>
                         <td class="label">Employee name:</td>
                         <td><form:input path="employeeName" size="25"/></td>
@@ -46,33 +50,12 @@
                         <td class="label">Supervisor name:</td>
                         <td><form:input path="supervisorName" size="25"/></td>
                     </tr>
-
                     <tr>
-                        <td class="label">Request ID:</td>
-                        <td><form:input path="requestId" size="25"/></td>
+                        <td class="label">Job Title:</td>
+                        <td><form:input path="jobTitle" size="25"/></td>
                     </tr>
-
-                    <tr>
-                        <td class="label">State</td>
-                        <td Class="droplist">
-                            <form:select path="state">
-                                <form:option value="" label="SELECT"/>
-                                <form:options items="${target.map.stateList}"/>
-                            </form:select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">Leave type</td>
-                        <td Class="droplist">
-                            <form:select path="leaveType">
-                                <form:option value="" label="SELECT"/>
-                                <form:options items="${target.map.leaveTypeList}"/>
-                            </form:select>
-                        </td>
-                    </tr>
-
                 </table>
+
             </fieldset>
             <br/>
             &nbsp;&nbsp;&nbsp;&nbsp; <form:button type="submit" name="_eventId_cancel" class="cancel-btn">Cancel</form:button>

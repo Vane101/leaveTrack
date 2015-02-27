@@ -2,6 +2,7 @@ package com.ubiquitech.leaveTrack.services;
 
 import com.ubiquitech.leaveTrack.dao.EmployeeDao;
 import com.ubiquitech.leaveTrack.domain.Employee;
+import com.ubiquitech.leaveTrack.form.QueryEmployeeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,5 +42,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getEmployeeById(Long id) {
         return employeeDao.getEmployeeById(id);
+    }
+
+    @Override
+    public List getQueriedEmployees(QueryEmployeeForm queryEmployeeForm) {
+        return employeeDao.getQueriedEmployees(queryEmployeeForm);
     }
 }

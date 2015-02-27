@@ -28,7 +28,7 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Process Leave Request</span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
@@ -40,7 +40,7 @@
 
                     <tr>
                         <td class="label">Employee name</td>
-                        <td><input type="text" value="${target.employeeFullName}" readonly class="readOnlyText"></td>
+                        <td><input type="text" value="${target.request.employee.employeeName}" readonly class="readOnlyText"></td>
                     </tr>
 
                     <tr>

@@ -26,7 +26,7 @@
 
     <view-state id="processLeaveRequest" model="target">
         <binder>
-            <binding property="employeeFullName"/>
+            <binding property="request.employee.employeeName"/>
             <binding property="request.startDate"/>
             <binding property="request.endDate"/>
             <binding property="request.leaveType"/>

@@ -29,8 +29,6 @@ public class QueryRequestActions extends MultiAction {
 
         List requestSelected = requestService.getRequestsByStatusAndRequestId("", (long) requestId);
         form.setRequest((Request) requestSelected.get(0));
-        form.setEmployeeFullName(form.getRequest().getEmployee().getFirstName() + " " + form.getRequest().getEmployee().getLastName());
-        form.setSupervisorFullName(form.getRequest().getEmployee().getSupervisor().getFirstName() + " " + form.getRequest().getEmployee().getSupervisor().getLastName());
         return success();
     }
 

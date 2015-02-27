@@ -22,7 +22,7 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Change Password </span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 

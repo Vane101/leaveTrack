@@ -8,10 +8,8 @@
 
     <view-state id="requestQueryForm" model="target">
         <binder>
-            <binding property="employeeFirstName"/>
-            <binding property="employeeLastName"/>
-            <binding property="supervisorFirstName"/>
-            <binding property="supervisorLastName"/>
+            <binding property="employeeName"/>
+            <binding property="supervisorName"/>
             <binding property="leaveType"/>
             <binding property="state"/>
             <binding property="requestId"/>
@@ -39,7 +37,7 @@
 
     <view-state id="requestDetails" model="target">
         <binder>
-            <binding property="employeeFullName"/>
+            <binding property="request.employee.employeeName"/>
             <binding property="request.startDate"/>
             <binding property="request.endDate"/>
             <binding property="request.leaveType"/>
@@ -47,7 +45,7 @@
             <binding property="request.state"/>
             <binding property="request.timestamp"/>
             <binding property="request.comment"/>
-            <binding property="supervisorFullName"/>
+            <binding property="request.employee.supervisor.employeeName"/>
         </binder>
         <transition on="cancel" to="home" validate="false" bind="false"/>
         <transition on="back" to="requestQueryResults" validate="false" bind="false"/>

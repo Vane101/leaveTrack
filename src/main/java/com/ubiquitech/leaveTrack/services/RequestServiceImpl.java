@@ -45,6 +45,13 @@ public class RequestServiceImpl implements RequestService {
     public List getQueriedRequests(QueryRequestForm queryRequestForm) {
         return requestDao.getQueriedRequests(queryRequestForm);
     }
+
+    @Override
+    public List getRequestByEmployeeId(Long id) {
+        return requestDao.getRequestByEmployeeId(id);
+    }
+
+
 }
 
 

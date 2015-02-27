@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="employeeQueryForm">
+
+    <var name="target" class="com.ubiquitech.leaveTrack.form.QueryEmployeeForm"/>
+
+    <view-state id="employeeQueryForm" model="target">
+        <binder>
+            <binding property="employeeName"/>
+            <binding property="supervisorName"/>
+            <binding property="jobTitle"/>
+            <binding property="username"/>
+        </binder>
+        <transition on="cancel" to="home" validate="false" history="discard" bind="false"/>
+        <transition on="search" to="employeeQueryResults">
+            <evaluate expression="employeeQueryActions.getEmployees(flowRequestContext)"/>
+        </transition>
+    </view-state>
+
+    <view-state id="employeeQueryResults">
+        <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="back" to="employeeQueryForm" validate="false" bind="false"/>
+        <transition on="processEmployee" to="selectEmployee" validate="false" bind="false"/>
+    </view-state>
+
+    <action-state id="selectEmployee">
+        <on-entry>
+            <set name="requestScope.employeeId" value="requestParameters.employeeId"/>
+        </on-entry>
+        <evaluate expression="employeeQueryActions.selectEmployee(employeeId,target)"/>
+        <transition to="employeeDetails"/>
+    </action-state>
+
+    <view-state id="employeeDetails" model="target">
+        <binder>
+            <binding property="employee.employeeName"/>
+            <binding property="employee.username"/>
+            <binding property="employee.phoneNumber"/>
+            <binding property="employee.email"/>
+            <binding property="employee.jobTitle"/>
+            <binding property="employee.supervisor.employeeName"/>
+            <binding property="employee.leaveDays.yearEmployed"/>
+        </binder>
+        <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="back" to="employeeQueryResults" validate="false" bind="false"/>
+        <transition on="getEmployeeRequests" to="showEmployeeRequests" validate="false" bind="false"/>
+    </view-state>
+
+    <action-state id="showEmployeeRequests">
+        <on-entry>
+            <set name="requestScope.employeeId" value="requestParameters.employeeId"/>
+        </on-entry>
+        <evaluate expression="employeeQueryActions.getEmployeeRequests(employeeId,flowRequestContext)"/>
+        <transition to="showEmployeeRequestsResults"/>
+    </action-state>
+
+    <view-state id="showEmployeeRequestsResults" >
+        <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="back" to="employeeDetails" validate="false" bind="false"/>
+        <transition on="processRequest" to="selectRequest" validate="false" bind="false"/>
+    </view-state>
+
+    <action-state id="selectRequest">
+        <on-entry>
+            <set name="requestScope.requestId" value="requestParameters.requestId"/>
+        </on-entry>
+        <evaluate expression="employeeQueryActions.selectLeaveRequest(requestId,target)"/>
+        <transition to="employeeRequestDetail"/>
+    </action-state>
+
+
+    <view-state id="employeeRequestDetail" model="target">
+        <binder>
+            <binding property="request.employee.employeeName"/>
+            <binding property="request.startDate"/>
+            <binding property="request.endDate"/>
+            <binding property="request.leaveType"/>
+            <binding property="request.reason"/>
+            <binding property="request.state"/>
+            <binding property="request.timestamp"/>
+            <binding property="request.comment"/>
+            <binding property="request.employee.supervisor.employeeName"/>
+        </binder>
+        <transition on="cancel" to="home" validate="false" bind="false"/>
+        <transition on="back" to="showEmployeeRequestsResults" validate="false" bind="false"/>
+    </view-state>
+
+
+    <end-state id="home" view="externalRedirect:home"/>
+</flow>

@@ -27,15 +27,16 @@ public class EditEmployeeDatabaseAction extends MultiAction {
         form.setEmployee(newEmployee);
 
         List<String> nameList = new ArrayList<String>();
-        List<Object[]> employees = employeeService.getEmployeeNames();
+        List employees = employeeService.getEmployeeNames();
         nameList.add("SELECT");
-        for (Object[] employee : employees) {
-            String name = employee[1] + " " + employee[2];
+        //nameList.add(.valueOf(employees[0]));
+        for (Object employee : employees) {
+            String name = (String) employee;
             nameList.add(name);
         }
         //Prevent from selecting yourself as a supervisor
         for (Iterator<String> iterator = nameList.iterator(); iterator.hasNext(); ) {
-            String name = newEmployee.getFirstName() + " " + newEmployee.getLastName();
+            String name = newEmployee.getEmployeeName();
             String string = iterator.next();
             if (string.equals(name)) {
                 iterator.remove();
@@ -58,7 +59,7 @@ public class EditEmployeeDatabaseAction extends MultiAction {
         List map = (List) form.getMap().get("name");
         if (form.getSupervisorID() > 0) {
             form.setSupervisorName((String) map.get(form.getSupervisorID()));
-            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long) form.getSupervisorID()));
+            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long)form.getSupervisorID()));
         } else {
             form.setSupervisorName("");
         }

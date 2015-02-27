@@ -30,8 +30,8 @@ public class LoginAndCreateEmployeeDatabaseAction extends MultiAction {
         List<String> nameList = new ArrayList<String>();
         List<Object[]> employees = employeeService.getEmployeeNames();//Gets all employee names
         nameList.add("SELECT");
-        for (Object[] employee : employees) {
-            String name = employee[1] + " " + employee[2];
+        for (Object employee : employees) {
+            String name = (String) employee;
             nameList.add(name);
         }
         form.setMap(nameList);
@@ -42,7 +42,7 @@ public class LoginAndCreateEmployeeDatabaseAction extends MultiAction {
         List map = (List) form.getMap().get("name");
         if (form.getSupervisorID() > 0) {
             form.setSupervisorName((String) map.get(form.getSupervisorID()));
-            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long) form.getSupervisorID()));
+            form.getEmployee().setSupervisor(employeeService.getEmployeeById((long)form.getSupervisorID()));
         } else {
             form.setSupervisorName("");
         }

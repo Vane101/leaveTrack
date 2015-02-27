@@ -12,8 +12,7 @@
     <view-state id="createEmployeeForm" model="target">
         <binder>
             <binding property="employee.username"/>
-            <binding property="employee.firstName"/>
-            <binding property="employee.lastName"/>
+            <binding property="employee.employeeName"/>
             <binding property="employee.phoneNumber"/>
             <binding property="employee.email"/>
             <binding property="employee.jobTitle"/>
@@ -34,8 +33,7 @@
     <view-state id="confirmDetails" model="target">
         <binder>
             <binding property="employee.username"/>
-            <binding property="employee.firstName"/>
-            <binding property="employee.lastName"/>
+            <binding property="employee.employeeName"/>
             <binding property="employee.phoneNumber"/>
             <binding property="employee.email"/>
             <binding property="employee.jobTitle"/>

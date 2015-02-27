@@ -26,9 +26,7 @@ public class Employee implements Serializable {
     @NotEmpty
     private String username;
     @NotEmpty
-    private String firstName;
-    @NotEmpty
-    private String lastName;
+    private String employeeName;
 
     private String phoneNumber;
     @NotEmpty
@@ -105,22 +103,6 @@ public class Employee implements Serializable {
         this.phoneNumber = phoneNumber.trim();
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName.toUpperCase().trim();
-    }
-
     public String getUsername() {
         return username;
     }
@@ -168,4 +150,14 @@ public class Employee implements Serializable {
     public void setSupervisor(Employee supervisor) {
         this.supervisor = supervisor;
     }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName.toUpperCase().trim();
+    }
 }
+
+

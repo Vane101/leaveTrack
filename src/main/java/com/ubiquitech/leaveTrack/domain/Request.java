@@ -36,6 +36,8 @@ public class Request implements Serializable {
     private LocalDate startDate;
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate endDate;
+
+    @NotEmpty
     private String comment;
     @NotEmpty
     private String state; /* should this not be an enum i.e it can only have certain values? */

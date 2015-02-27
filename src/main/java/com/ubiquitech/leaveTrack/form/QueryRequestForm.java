@@ -16,13 +16,9 @@ public class QueryRequestForm implements Serializable {
     protected Request request = new Request();
     String state;
     String leaveType;
-    String employeeFirstName;
-    String employeeLastName;
-    String supervisorFirstName;
-    String supervisorLastName;
+    String employeeName;
+    String supervisorName;
     Long requestId;
-    String employeeFullName;
-    String supervisorFullName;
 
     public String getState() {
         return state;
@@ -38,38 +34,6 @@ public class QueryRequestForm implements Serializable {
 
     public void setLeaveType(String leaveType) {
         this.leaveType = leaveType.toUpperCase().trim();
-    }
-
-    public String getEmployeeFirstName() {
-        return employeeFirstName;
-    }
-
-    public void setEmployeeFirstName(String employeeFirstName) {
-        this.employeeFirstName = employeeFirstName.toUpperCase().trim();
-    }
-
-    public String getEmployeeLastName() {
-        return employeeLastName;
-    }
-
-    public void setEmployeeLastName(String employeeLastName) {
-        this.employeeLastName = employeeLastName.toUpperCase().trim();
-    }
-
-    public String getSupervisorFirstName() {
-        return supervisorFirstName;
-    }
-
-    public void setSupervisorFirstName(String supervisorFirstName) {
-        this.supervisorFirstName = supervisorFirstName.toUpperCase().trim();
-    }
-
-    public String getSupervisorLastName() {
-        return supervisorLastName;
-    }
-
-    public void setSupervisorLastName(String supervisorLastName) {
-        this.supervisorLastName = supervisorLastName.toUpperCase().trim();
     }
 
     public Long getRequestId() {
@@ -93,19 +57,19 @@ public class QueryRequestForm implements Serializable {
         this.request = request;
     }
 
-    public String getEmployeeFullName() {
-        return employeeFullName;
+    public String getSupervisorName() {
+        return supervisorName;
     }
 
-    public void setEmployeeFullName(String employeeFullName) {
-        this.employeeFullName = employeeFullName.toUpperCase().trim();
+    public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
     }
 
-    public String getSupervisorFullName() {
-        return supervisorFullName;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setSupervisorFullName(String supervisorFullName) {
-        this.supervisorFullName = supervisorFullName.toUpperCase().trim();
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 }

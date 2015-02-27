@@ -8,7 +8,6 @@ import com.ubiquitech.leaveTrack.form.QueryRequestForm;
 import com.ubiquitech.leaveTrack.services.EmployeeService;
 import com.ubiquitech.leaveTrack.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,18 +32,18 @@ public class LeaveTrackController {
     private boolean calendarBoolean = true;
 
 
-    @RequestMapping(value = "test")
-    public ModelAndView testJSP(@RequestParam("id") long id, HttpServletRequest request) {
+    @RequestMapping(value = "eventDetails")
+    public ModelAndView setupEventDetails(@RequestParam("id") long id, HttpServletRequest request) {
         QueryRequestForm calendarRequest = new QueryRequestForm();
         calendarRequest.setRequest((Request) requestService.getRequestsByStatusAndRequestId("Approved", id).get(0));
-        calendarRequest.setEmployeeFullName(calendarRequest.getRequest().getEmployee().getFirstName() + " " + calendarRequest.getRequest().getEmployee().getLastName());
-        calendarRequest.setSupervisorFullName(calendarRequest.getRequest().getEmployee().getSupervisor().getFirstName() + " " + calendarRequest.getRequest().getEmployee().getSupervisor().getLastName());
+        calendarRequest.setEmployeeName(calendarRequest.getRequest().getEmployee().getEmployeeName());
+        calendarRequest.setSupervisorName(calendarRequest.getRequest().getEmployee().getSupervisor().getEmployeeName());
         HttpSession session = request.getSession(true);
         session.setAttribute("calendarRequest", calendarRequest);
         return new ModelAndView("requestDetails");
     }
 
-    @Scope("request")
+
     @RequestMapping(value = "calendarEventDetails", method = RequestMethod.GET)
     public ModelAndView calendarEventDetails() {
         calendarBoolean = true;
@@ -73,7 +72,7 @@ public class LeaveTrackController {
             for (Request aRequestsApproved : requestsApproved) {
                 myRandomNumber = rand.nextInt(0x100000) + 0x100000;///Get a random Hex number to obtain a unique color for each event on calendar display
                 randomColor = Integer.toHexString(myRandomNumber);
-                title = aRequestsApproved.getEmployee().getFirstName() + " " + aRequestsApproved.getEmployee().getLastName() + " " + aRequestsApproved.getLeaveType() + ".Request ID:" + aRequestsApproved.getId();
+                title = aRequestsApproved.getEmployee().getEmployeeName()+ " " + aRequestsApproved.getLeaveType() + ".Request ID:" + aRequestsApproved.getId();
                 startDate = String.valueOf(aRequestsApproved.getStartDate());
                 endDate = String.valueOf(aRequestsApproved.getEndDate());
                 long id = aRequestsApproved.getId();
@@ -135,8 +134,7 @@ public class LeaveTrackController {
     }
 
 
-    @Scope("request")
-    @RequestMapping("/login")
+     @RequestMapping("/login")
     public ModelAndView checkDetails(HttpServletRequest request) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

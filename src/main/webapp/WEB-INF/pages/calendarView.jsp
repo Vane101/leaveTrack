@@ -28,7 +28,7 @@
     <script src="<c:url value="/resources/fullCalendar/fullcalendar.js"/>"></script>
 
     <style>
-        #calendar{font-size:14px !important;}
+        #calendar{font-size:12px !important;}
     </style>
     <script>
 
@@ -42,11 +42,10 @@
                 },
 
                 eventClick: function (calEvent, jsEvent, view) {
-                          $.get("test",{id:calEvent.id},
+                          $.get("eventDetails",{id:calEvent.id},
                             function(data,status){
                                                           window.location="calendarEventDetails"
                             });
-
               },
 
                 select: function (start, end, color,allDay,id) {
@@ -61,6 +60,7 @@
                                     allDay: allDay,
                                     id:id,
                                     className: 'fc-event-width-overirde'
+
                                 },
                                 true // make the event "stick"
 
@@ -69,7 +69,7 @@
                     calendar.fullCalendar('unselect');
                 },
 
-                editable: true,
+                editable: false,
 
                 eventSources: [
                     {
@@ -100,11 +100,14 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Calendar</span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
     <div class="form">
+        <div class="notification">
+            <p> Click on a Request to view Request details.</p>
+        </div>
         <div id="calendar"></div>
         <form action="home">
             <input type="submit" value="Cancel" class="cancel-btn">

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: vane
-  Date: 2015/01/20
-  Time: 04:52 PM
+  Date: 2015/02/26
+  Time: 07:53 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -39,7 +39,7 @@
 <div class="tableBody">
 
     <div class="heading">
-        <p>&nbsp<span class="headingLeft">Request Leave</span>
+        <p>&nbsp<span class="headingLeft">Employee Requests</span>
             <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
@@ -61,8 +61,8 @@
                         <td class="heading">Status</td>
                     </tr>
 
-                        <%--@elvariable id="requestsFound" type="java.util.List"--%>
-                    <c:forEach var="requests" items="${requestsFound}">
+                        <%--@elvariable id="employeesRequestsFound" type="java.util.List"--%>
+                    <c:forEach var="requests" items="${employeesRequestsFound}">
                         <tr>
                             <td>
                                 <a href="${flowExecutionUrl}&_eventId=processRequest&requestId=${requests.id}">Request Details</a>

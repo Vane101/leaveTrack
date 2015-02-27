@@ -31,7 +31,7 @@
 
     <div class="heading">
         <p>&nbsp<span class="headingLeft">Edit Employee </span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
@@ -42,14 +42,9 @@
                 <legend>Edit employee details</legend>
                 <table class="tableFields">
                     <tr>
-                        <td class="label">First name:</td>
-                        <td><form:input path="employee.firstName" size="25"/></td>
-                        <td Class="error-message"><form:errors path="employee.firstName"/></td>
-                    </tr>
-                    <tr>
-                        <td class="label">Last name:</td>
-                        <td><form:input path="employee.lastName" size="25"/></td>
-                        <td class="error-message"><form:errors path="employee.lastName"/></td>
+                        <td class="label">Employee name:</td>
+                        <td><form:input path="employee.employeeName" size="25"/></td>
+                        <td Class="error-message"><form:errors path="employee.employeeName"/></td>
                     </tr>
                     <tr>
                         <td class="label">Phone number</td>

@@ -47,7 +47,7 @@
 <div class="applicationBody">
     <div class="heading">
         <p>&nbsp<span class="headingLeft">LeaveTrack Main Menu </span>
-            <span class="headingRight">${employeeSession.firstName} ${employeeSession.lastName} (${employeeSession.username})</span>
+            <span class="headingRight">${employeeSession.employeeName} (${employeeSession.username})</span>
         </p>
     </div>
 
@@ -70,9 +70,10 @@
                         </ul>
                     </li>
 
-                    <li class='has-sub'><a href='#'><span>Query Request</span></a>
+                    <li class='has-sub'><a href='#'><span>leaveTrack Query</span></a>
                         <ul>
                             <li><a href='<c:url value="/queryRequest"/>'><span> Requests Query</span></a></li>
+                            <li><a href='<c:url value="/queryEmployee"/>'><span>Employee Query</span></a></li>
                             <li class='last'><a href='<c:url value="setupCalendar"/>'><span>Calendar View</span></a></li>
                         </ul>
                     </li>

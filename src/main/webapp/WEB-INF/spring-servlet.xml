@@ -79,10 +79,10 @@
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.gmail.com"/>
-        <property name="port" value="587"/>
-        <property name="username" value="${gmail.email}"/><!-- gmail address-->
-        <property name="password" value="${gmail.password}"/><!--Gmail password-->
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+        <property name="username" value="${mail.username}"/><!-- mail address-->
+        <property name="password" value="${mail.password}"/><!--mail password-->
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
