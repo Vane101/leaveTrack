@@ -68,7 +68,7 @@
                     <tr>
                         <td class="label">Email</td>
                         <td><label>
-                            <input type="text" value="${target.employee}" readonly class="readOnlyText">
+                            <input type="text" value="${target.employee.email}" readonly class="readOnlyText">
                         </label></td>
                     </tr>
 
